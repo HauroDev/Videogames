@@ -1,0 +1,1 @@
+# los test se deben ejecutar en otra base de datos (uno de pruebas explicitamente), pero aun no tengo claro como se hace, pronto lo sabre
