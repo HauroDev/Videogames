@@ -1,13 +1,11 @@
 const { Genre, Videogame, VideogameGenre, conn } = require('../../src/db.js')
 const { expect } = require('chai')
-const { vgTest } = require('./videogame.spec.js')
-
-const genreTests = [  { id: 51, name: 'Indie' },  { id: 15, name: 'Sports' },  { id: 1, name: 'Racing' }]
+const { gTest, vgTest } = require('../precarga/recordTest.js')
 
 describe('VideogameGenre model', () => {
   before(async () => {
     await conn.authenticate()
-    await Genre.bulkCreate(genreTests)
+    await Genre.bulkCreate(gTest)
   })
 
   beforeEach(async () => {
@@ -41,4 +39,4 @@ describe('VideogameGenre model', () => {
   })
 })
 
-module.exports = { gTest: genreTests }
+module.exports = { gTest }
