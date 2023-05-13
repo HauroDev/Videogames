@@ -3,15 +3,17 @@ const { Videogame, Genre } = require('../db.js')
 const { API_KEY } = process.env
 const filterGameProperties = require('../utils/filterGameProperties.js')
 
+/*
+  Hay que refactorizar
+*/
+
 module.exports = async (req, res) => {
   const { idVideogame } = req.params
   const regexUUID =
     /^[0-9a-f]{8}-[0-9a-f]{4}-[4|5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 
-  let response
+  let response, game
   try {
-    let game
-
     if (regexUUID.test(idVideogame)) {
       response = await Videogame.findByPk(idVideogame, {
         include: {
@@ -19,6 +21,7 @@ module.exports = async (req, res) => {
           through: { attributes: [] }
         }
       })
+
       if (!response) {
         const err = new Error('No se encontro el juego con id ' + idVideogame)
         err.response = { status: 404 }

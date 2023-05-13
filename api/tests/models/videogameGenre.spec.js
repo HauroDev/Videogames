@@ -1,6 +1,6 @@
 const { Genre, Videogame, VideogameGenre, conn } = require('../../src/db.js')
 const { expect } = require('chai')
-const { gTest, vgTest } = require('../precarga/recordTest.js')
+const { gTest, vgTest } = require('../precarga/mocks.js')
 
 describe('VideogameGenre model', () => {
   before(async () => {

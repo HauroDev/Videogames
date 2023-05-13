@@ -11,9 +11,9 @@ module.exports = ({
   id,
   name,
   description,
-  platforms: platforms.map(({ platform: { id, name } }) => ({ id, name })),
+  platforms: platforms?.map(({ platform: { id, name } }) => ({ id, name })),
   image,
   released,
   rating,
-  genres: genres.map(({ id, name }) => ({ id, name }))
+  genres: genres?.map(({ id, name }) => ({ id, name }))
 })

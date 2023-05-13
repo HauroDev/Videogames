@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test-preload": "node ./tests/precarga/recordTest.js",
     "start": "nodemon -L",
     "test": "mocha -w ./tests/**/*.spec.js"
   },

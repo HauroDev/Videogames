@@ -1,6 +1,6 @@
 const { Videogame, conn } = require('../../src/db.js')
 const { expect } = require('chai')
-const { vgTest } = require('../precarga/recordTest.js')
+const { vgTest } = require('../precarga/mocks.js')
 
 
 describe('Videogame model', () => {
