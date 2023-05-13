@@ -152,8 +152,9 @@ describe('Videogame routes', () => {
       })
       it('deberia devolver un mensaje de error con status 404', async () => {
         const gameId = '3412a'
-        const { body } = await agent.get(`/videogames/${gameId}`)
+        const { status, body } = await agent.get(`/videogames/${gameId}`)
 
+        expect(status).to.equal(404)
         expect(body).to.have.property('message')
       })
     })

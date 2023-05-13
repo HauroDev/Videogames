@@ -1,4 +1,4 @@
-const getGames = require('../utils/getGames.js')
+const { getGames } = require('../utils/getGames.js')
 
 module.exports = async (req, res) => {
   try {
@@ -7,10 +7,7 @@ module.exports = async (req, res) => {
 
     res.status(200).json({ results })
   } catch (error) {
-    const { message } = error
-
-    console.log(error)
-
-    res.status(500).json({ message })
+    const { status, message } = error
+    res.status(status).json({ message })
   }
 }
