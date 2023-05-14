@@ -10,7 +10,7 @@ const { API_KEY } = process.env
 const getGamesForAPIWithLimit = async (limit, name) => {
   const promises = Array.from({ length: limit }, (_, i) => {
     return axios.get(
-      `https://api.rawg.io/api/games?key=${API_KEY}&search=${name}page=${
+      `https://api.rawg.io/api/games?key=${API_KEY}&search=${name}&page=${
         i + 1
       }`
     )
