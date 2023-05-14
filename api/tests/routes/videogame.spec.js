@@ -7,6 +7,10 @@ const { vgTest, gTest } = require('../precarga/mocks.js')
 
 const agent = session(app)
 
+/* 
+  refactorizar tests: para una mejor lectura
+*/
+
 const vgTestDB = {
   ...vgTest,
   id: '5a1a4b07-afa9-4289-a63a-3ab09672791f'
