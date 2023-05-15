@@ -1,18 +1,20 @@
 import { useNavigate } from 'react-router-dom'
 
 const Landing = () => {
-
   const navigate = useNavigate()
 
-  const goHome = ()=>{
+  const goHome = () => {
     navigate('/home')
   }
 
   return (
-    <div>
-      <h1>Bienvenido a la mejor pagina web del mundo</h1>
+    <>
+      <h1>Bienvenido a la mejor pagina web de videojuegos del mundo</h1>
+      <p>
+        En esta pagina web podras encontrar todo sobre tus juegos favoritos,
+      </p>
       <button onClick={goHome}>click para entrar</button>
-    </div>
+    </>
   )
 }
 

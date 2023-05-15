@@ -4,12 +4,22 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
+    'plugin:react-hooks/recommended'
   ],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-  settings: { react: { version: '18.2' } },
-  plugins: ['react-refresh'],
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.d.ts']
+      }
+    },
+    react: { version: '18.2' },
+    'import/extensions': ['.js', '.jsx', '.ts', '.tsx', '.d.ts']
+  },
+  plugins: ['react-refresh', 'import'],
   rules: {
     'react-refresh/only-export-components': 'warn',
-  },
+    'react/prop-types': 'off',
+    'import/no-unresolved': 'error'
+  }
 }
