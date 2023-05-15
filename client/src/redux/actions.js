@@ -10,6 +10,8 @@ import {
 
 const url_server = import.meta.env.VITE_URL_API
 
+console.log(url_server)
+
 export const getGames = () => {
   const endpoint = url_server + '/videogames'
   return async (dispatch) => {
