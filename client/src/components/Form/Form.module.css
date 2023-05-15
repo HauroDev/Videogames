@@ -1,0 +1,19 @@
+.formulario {
+  display: flex;
+  flex-direction: column;
+  
+}
+.registro {
+  display: inherit;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.label {
+  margin: .5rem 0;
+  margin-right: 10rem;
+  padding-top: 0;
+}
+.input {
+  padding-left: 0;
+  text-align: left;
+}

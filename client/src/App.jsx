@@ -6,6 +6,7 @@ import Home from './components/Home/Home'
 import Form from './components/Form/Form'
 import NavBar from './components/Home/Header/NavBar'
 import SearchBar from './components/Home/Header/SearchBar'
+import Detail from './components/Detail/Detail'
 
 function App() {
   const { pathname: ubicacion } = useLocation()
@@ -22,6 +23,7 @@ function App() {
         <Route path='/' element={<Landing />} />
         <Route path='/home' element={<Home />} />
         <Route path='/form' element={<Form />} />
+        <Route path='/detail/:idVideogame' element={<Detail />} />
       </Routes>
       </main>
     </>

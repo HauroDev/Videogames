@@ -1,4 +1,6 @@
 import {
+  CLEAN_GAMES,
+  CLEAN_GAME_DETAILS,
   GET_GAMES,
   GET_GAME_DETAILS,
   POST_GAME,
@@ -19,8 +21,12 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         allGames: payload
       }
+    case CLEAN_GAMES:
+      return { ...state, allGames: [] }
     case GET_GAME_DETAILS:
       return { ...state, gameDetail: payload }
+    case CLEAN_GAME_DETAILS:
+      return { ...state, gameDetail: {} }
     case POST_GAME:
       return { ...state }
 
