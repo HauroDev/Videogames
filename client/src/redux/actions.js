@@ -8,7 +8,7 @@ import {
   SEARCH_GAMES
 } from './types-action'
 
-const url_server = import.meta.env.VITE_URL_API
+const url_server = 'https://videogames-api-1nxb.onrender.com'
 
 console.log(url_server)
 
