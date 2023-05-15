@@ -8,7 +8,7 @@ require('dotenv').config()
 
 require('./db.js')
 
-const { URL_API } = process.env
+const { URL_CLIENT } = process.env
 
 const server = express()
 
@@ -19,7 +19,7 @@ server.use(bodyParser.json({ limit: '50mb' }))
 server.use(cookieParser())
 server.use(morgan('dev'))
 server.use((_, res, next) => {
-  res.header('Access-Control-Allow-Origin', URL_API) // update to match the domain you will make the request from
+  res.header('Access-Control-Allow-Origin', URL_CLIENT) // update to match the domain you will make the request from
   res.header('Access-Control-Allow-Credentials', 'true')
   res.header(
     'Access-Control-Allow-Headers',
