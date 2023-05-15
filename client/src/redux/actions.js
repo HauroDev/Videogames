@@ -8,7 +8,7 @@ import {
   SEARCH_GAMES
 } from './types-action'
 
-const url_server = 'https://videogames-api-1nxb.onrender.com'
+const url_server = 'https://videogames-api-1nxb.onrender.com' //investigar como usar las variables de entorno con netlify
 
 console.log(url_server)
 
