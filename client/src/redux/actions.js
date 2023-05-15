@@ -8,7 +8,7 @@ import {
   SEARCH_GAMES
 } from './types-action'
 
-const url_server = 'http://localhost:3001'
+const url_server = import.meta.env.VITE_URL_API
 
 export const getGames = () => {
   const endpoint = url_server + '/videogames'
