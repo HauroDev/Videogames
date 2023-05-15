@@ -13,7 +13,6 @@ const Home = () => {
   return (
     <>
       <p>Buscador de juegos</p>
-      {/* aca tendria que estar los filtros */}
       <Games />
     </>
   )

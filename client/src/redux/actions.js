@@ -10,8 +10,6 @@ import {
 
 const url_server = 'https://videogames-api-1nxb.onrender.com' //investigar como usar las variables de entorno con netlify
 
-console.log(url_server)
-
 export const getGames = () => {
   const endpoint = url_server + '/videogames'
   return async (dispatch) => {

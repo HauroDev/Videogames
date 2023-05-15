@@ -5,7 +5,7 @@ import Pagination from './../Pagination/Pagination'
 import styles from './Games.module.css'
 import { useEffect, useState } from 'react'
 import { cleanGames } from '../../../redux/actions'
-import Loading from '../../Loading'
+import Loading from '../../common/Loading/Loading'
 
 const Games = () => {
   const [games, setGames] = useState([])
@@ -27,27 +27,31 @@ const Games = () => {
   }, [allGames])
 
   const loadPage = (page) => {
-    const skiped = 15 * page
-    const array = allGames.slice(skiped, skiped + 15)
+    let posInit = 15 * page
+    let posFinal = posInit + 15
+
+    if (posFinal > allGames?.length) posFinal = allGames.length
+
+    const array = allGames.slice(posInit, posFinal)
     setGames(array)
   }
 
   return (
     <>
       {loading ? (
-        <Loading message='Cargando...'/>
+        <Loading message='Cargando...' />
       ) : (
         <>
-          <div className={styles.cards}>
+          <section className={styles.cards}>
             {allGames.message && <p>{allGames.message}</p>}
             {games &&
               games.map((game) => {
                 return <Game {...game} key={game.id} />
               })}
-          </div>
+          </section>
           {!allGames.message && (
             <Pagination
-              pages={Math.floor(allGames.length / 15)}
+              pages={Math.ceil(allGames.length / 15)}
               loadPage={loadPage}
             />
           )}
