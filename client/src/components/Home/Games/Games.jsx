@@ -5,6 +5,7 @@ import Pagination from './../Pagination/Pagination'
 import styles from './Games.module.css'
 import { useEffect, useState } from 'react'
 import { cleanGames } from '../../../redux/actions'
+import Loading from '../../Loading'
 
 const Games = () => {
   const [games, setGames] = useState([])
@@ -34,7 +35,7 @@ const Games = () => {
   return (
     <>
       {loading ? (
-        <p>Cargando...</p>
+        <Loading message='Cargando...'/>
       ) : (
         <>
           <div className={styles.cards}>

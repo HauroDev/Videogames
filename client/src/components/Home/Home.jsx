@@ -12,8 +12,8 @@ const Home = () => {
 
   return (
     <>
-      <h1>Home</h1>
-      <p>buscador loco de videojuegos 0.1~delta</p>
+      <p>Buscador de juegos</p>
+      {/* aca tendria que estar los filtros */}
       <Games />
     </>
   )
