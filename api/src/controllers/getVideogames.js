@@ -8,6 +8,6 @@ module.exports = async (req, res) => {
     res.status(200).json({ results })
   } catch (error) {
     const { status, message } = error
-    res.status(status).json({ message })
+    res.status(status || 500).json({ message })
   }
 }
