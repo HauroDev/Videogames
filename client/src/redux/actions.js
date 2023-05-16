@@ -5,6 +5,7 @@ import {
   CLEAN_GENRES,
   GET_GAMES,
   GET_GAME_DETAILS,
+  GET_GENRES,
   POST_GAME,
   SEARCH_GAMES
 } from './types-action'
@@ -95,7 +96,7 @@ export const getGenres = () => {
   return async (dispatch) => {
     const { data } = await axios.get(endpoint_genres)
     return dispatch({
-      type: SEARCH_GAMES,
+      type: GET_GENRES,
       payload: data.genres
     })
   }

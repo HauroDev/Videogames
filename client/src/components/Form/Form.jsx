@@ -1,30 +1,21 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { getCurrentDate } from '../../utils/date'
 import styles from './Form.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { cleanGenres, getGenres } from '../../redux/actions'
 
-const initialGame = {
-  name: '',
-  description: '',
-  platforms: [],
-  image: '',
-  released: '',
-  rating: 0,
-  genres: []
-}
-
-const optionsPlatforms = [
-  { id: 4, name: 'PC' },
-  { id: 187, name: 'PlayStation 5' },
-  { id: 18, name: 'PlayStation 4' },
-  { id: 1, name: 'Xbox One' },
-  { id: 7, name: 'Nintendo Switch' },
-  { id: 21, name: 'Android' }
-]
-
 const Form = () => {
-  const [gameInfo, setGameInfo] = useState(initialGame)
+  const [gameInfo, setGameInfo] = useState({
+    name: '',
+    description: '',
+    platforms: [],
+    image: '',
+    released: '',
+    rating: 0,
+    genres: []
+  })
+
+  const inputRef = useRef(null)
 
   const { genres: gens } = useSelector((state) => state)
   const dispatch = useDispatch()
@@ -34,17 +25,54 @@ const Form = () => {
     return () => dispatch(cleanGenres())
   }, [])
 
+  useEffect(() => {
+    console.log(gameInfo)
+  }, [gameInfo])
+
+  const addGenre = (event) => {
+    const { value } = event.target
+    const gen = gens.find((gen) => gen.id === +value)
+    setGameInfo({ ...gameInfo, genres: [...gameInfo.genres, gen] })
+  }
+
+  const removeGenre = (id) => {
+    const updateGenres = gameInfo.genres.filter((gen) => gen.id !== +id)
+    setGameInfo({ ...gameInfo, genres: updateGenres })
+  }
+
+  const addPlatform = (event) => {
+    const {
+      key,
+      target: { value }
+    } = event
+    const isFound = gameInfo.platforms.some(
+      (plat) => plat.toLowerCase() === value.toLowerCase()
+    )
+
+    console.log(event)
+
+    console.log(value.slice(-2).length)
+
+    if (key === 'Enter' || value.slice(-2) === '  ') {
+      event.preventDefault()
+      if (!isFound && value !== '') {
+        setGameInfo({
+          ...gameInfo,
+          platforms: [...gameInfo.platforms, value.trim()]
+        })
+        inputRef.current.value = ''
+      }
+    }
+  }
+
+  const removePlatform = (name) => {
+    const updatePlatforms = gameInfo.platforms.filter((plat) => plat !== name)
+    setGameInfo({ ...gameInfo, platforms: updatePlatforms })
+  }
+
   const handleChange = (event) => {
     const { name, value } = event.target
-
-    // tiene que evitar repetir valores de los arrays genres y platforms (id's y name's)
-
-    let flag = Array.isArray(gameInfo[name]) ? 1 : 0
-
-    setGameInfo({
-      ...gameInfo,
-      [name]: flag ? [...gameInfo[name], value] : value
-    })
+    setGameInfo({ ...gameInfo, [name]: value })
   }
 
   const handlerSubmit = (event) => {
@@ -58,7 +86,7 @@ const Form = () => {
       <form className={styles.formulario} onSubmit={handlerSubmit}>
         <div className={styles.registro}>
           <label className={styles.label} htmlFor='name'>
-            Nombre del Juego:{' '}
+            Nombre del Juego:
           </label>
           <input
             name='name'
@@ -70,7 +98,7 @@ const Form = () => {
 
         <div className={styles.registro}>
           <label className={styles.label} htmlFor='description'>
-            Descripcion:{' '}
+            Descripcion:
           </label>
           <textarea
             name='description'
@@ -81,34 +109,39 @@ const Form = () => {
 
         <div className={styles.registro}>
           <label className={styles.label} htmlFor='platforms'>
-            Plataformas:{' '}
+            Plataformas:
           </label>
-
-          <select
+          <input
+            ref={inputRef}
             name='platforms'
-            defaultValue='Select Platform'
-            // onChange={handleChange}
-          >
-            {optionsPlatforms.map((optPlat) => {
-              return (
-                <option key={optPlat.id} value={optPlat}>
-                  {optPlat.name}
-                </option>
-              )
-            })}
-          </select>
+            type='text'
+            onKeyUp={addPlatform}
+          />
         </div>
+        <section className={styles.registro}>
+          {gameInfo.platforms?.map((plat) => (
+            <article key={plat}>
+              {plat}
+              <button onClick={() => removePlatform(plat)}>x</button>
+            </article>
+          ))}
+        </section>
 
         <div className={styles.registro}>
           <label className={styles.label} htmlFor='image'>
-            Poster/Imagen:{' '}
+            Poster/Imagen:
           </label>
-          <input name='image' type='text' />
+          <input
+            name='image'
+            type='text'
+            onChange={handleChange}
+            value={gameInfo.image}
+          />
         </div>
 
         <div className={styles.registro}>
           <label className={styles.label} htmlFor='released'>
-            Fecha de lanzamiento:{' '}
+            Fecha de lanzamiento:
           </label>
           <input
             name='released'
@@ -121,7 +154,7 @@ const Form = () => {
 
         <div className={styles.registro}>
           <label className={styles.label} htmlFor='rating'>
-            Rating:{' '}
+            Rating:
           </label>
           <input
             name='rating'
@@ -136,18 +169,27 @@ const Form = () => {
 
         <div className={styles.registro}>
           <label className={styles.label} htmlFor='genres'>
-            Generos:{' '}
+            Generos:
           </label>
-          <select name='genres'>
-            {gens.map((gen) => {
-              return (
-                <option key={gen.id} value={gen}>
-                  {gen.name}
-                </option>
-              )
-            })}
+          <select name='genres' defaultValue='0' onChange={addGenre}>
+            <option value='0' disabled hidden>
+              Selecciona una opción
+            </option>
+            {gens?.map((obj) => (
+              <option key={obj.id} value={obj.id}>
+                {obj.name}
+              </option>
+            ))}
           </select>
         </div>
+        <section className={styles.registro}>
+          {gameInfo.genres.map((gen) => (
+            <article key={gen.id}>
+              {gen.name}
+              <button onClick={() => removeGenre(gen.id)}>x</button>
+            </article>
+          ))}
+        </section>
 
         <button>Enviar</button>
       </form>

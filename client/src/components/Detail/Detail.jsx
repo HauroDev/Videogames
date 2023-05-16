@@ -39,7 +39,7 @@ const Detail = () => {
           <div dangerouslySetInnerHTML={{ __html: gameDetail?.description }} />
           <p>
             Plataformas:{' '}
-            {gameDetail.platforms?.map((plat) => plat.name).join(', ')}
+            {gameDetail.platforms?.join(', ')}
           </p>
           <p>Generos: {gameDetail.genres?.map((gen) => gen.name).join(', ')}</p>
         </>
