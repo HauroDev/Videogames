@@ -2,6 +2,7 @@ import axios from 'axios'
 import {
   CLEAN_GAMES,
   CLEAN_GAME_DETAILS,
+  CLEAN_GENRES,
   GET_GAMES,
   GET_GAME_DETAILS,
   POST_GAME,
@@ -75,10 +76,10 @@ export const getSearch = (name) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(endpoint_search)
-    return dispatch({
-      type: SEARCH_GAMES,
-      payload: data.results
-    })
+      return dispatch({
+        type: SEARCH_GAMES,
+        payload: data.results
+      })
     } catch (error) {
       return dispatch({
         type: SEARCH_GAMES,
@@ -97,5 +98,11 @@ export const getGenres = () => {
       type: SEARCH_GAMES,
       payload: data.genres
     })
+  }
+}
+
+export const cleanGenres = () => {
+  return {
+    type: CLEAN_GENRES
   }
 }

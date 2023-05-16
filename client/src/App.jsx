@@ -5,7 +5,7 @@ import Landing from './components/Landing/Landing'
 import Home from './components/Home/Home'
 import Form from './components/Form/Form'
 import Detail from './components/Detail/Detail'
-import Header from './components/Home/Bar/Header'
+import Header from './components/common/Bar/Header'
 
 function App() {
   return (

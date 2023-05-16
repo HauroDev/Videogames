@@ -6,3 +6,4 @@ export const POST_GAME = 'POST_GAME'
 export const SEARCH_GAMES = 'SEARCH_GAMES'
 
 export const GET_GENRES = 'GET_GENRES'
+export const CLEAN_GENRES = 'CLEAN_GENRES'
