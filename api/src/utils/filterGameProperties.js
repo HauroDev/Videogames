@@ -3,7 +3,8 @@ module.exports = ({
   name,
   description,
   platforms,
-  background_image: image,
+  background_image,
+  image,
   released,
   rating,
   genres
@@ -11,8 +12,11 @@ module.exports = ({
   id,
   name,
   description,
-  platforms: platforms?.map(({ platform: { name } }) => name),
-  image,
+  platforms:
+    typeof platforms[0] === 'object'
+      ? platforms?.map(({ platform: { name } }) => name)
+      : platforms,
+  image: image || background_image,
   released,
   rating,
   genres: genres?.map(({ id, name }) => ({ id, name }))
