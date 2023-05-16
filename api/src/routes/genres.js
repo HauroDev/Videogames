@@ -24,11 +24,10 @@ router.get('/', async (_, res) => {
     const genresFind = await Genre.findAll({
       where: { id: genres.map((gen) => gen.id) }
     })
-
-    if (genres.length === genresFind.length)
-      throw customError(409, 'Ya se cargaron estos generos en la base de datos')
-
-    await Genre.bulkCreate(genres)
+    if (!genresFind.length) await Genre.bulkCreate(genres)
+    
+    // if (genres.length === genresFind.length)
+    //   throw customError(409, 'Ya se cargaron estos generos en la base de datos')
 
     res.status(200).json({ genres })
   } catch (error) {
