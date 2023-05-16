@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
         allowNull: false
       },
       platforms: {
-        type: DataTypes.ARRAY(DataTypes.JSONB),
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false
       },
       image: {

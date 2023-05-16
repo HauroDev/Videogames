@@ -1,6 +1,7 @@
 const { Op } = require('sequelize')
 const { Videogame, Genre } = require('../db')
 const { customError } = require('../utils/customError')
+const filterGameProperties = require('./filterGameProperties')
 
 const postGame = async (data) => {
   const { genres, name } = data
@@ -22,7 +23,7 @@ const postGame = async (data) => {
   if (genresFind.length !== genresIds.length)
     throw customError(400, 'uno o mas generos no existen en la db')
 
-  game = await Videogame.create(data)
+  game = await Videogame.create(filterGameProperties(data))
   await game.setGenres(genresIds)
 
   game = await Videogame.findByPk(game.id, {
