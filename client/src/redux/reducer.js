@@ -40,23 +40,20 @@ const reducer = (state = initialState, { type, payload }) => {
         payload === '⯀'
           ? [...state.games]
           : [...state.allGames].sort((a, b) => {
-              if (payload === '🠗') {
-                return b.name.localeCompare(a.name)
-              }
               if (payload === '🠕') {
                 return a.name.localeCompare(b.name)
+              }
+              if (payload === '🠗') {
+                return b.name.localeCompare(a.name)
               }
             })
       return { ...state, allGames: sortedGames }
     }
-
-    /* Falta reparar como muestra los datos */
-
     case SOURCE_GAMES: {
       const filterGames =
         payload === 'All'
           ? [...state.games]
-          : state.allGames.filter((game) => {
+          : state.games.filter((game) => {
               if (payload === 'DB') return isNaN(+game.id)
               if (payload === 'API') return typeof game.id === 'number'
             })
