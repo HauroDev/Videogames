@@ -4,7 +4,7 @@ import Pagination from './../Pagination/Pagination'
 
 import styles from './Games.module.css'
 import { useEffect, useState } from 'react'
-import { cleanGames } from '../../../redux/actions'
+import { cleanGames, getGames } from '../../../redux/actions'
 import Loading from '../../common/Loading/Loading'
 
 const Games = () => {
@@ -15,6 +15,7 @@ const Games = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    dispatch(getGames())
     return () => {
       dispatch(cleanGames())
     }
@@ -45,7 +46,7 @@ const Games = () => {
           <section className={styles.cards}>
             {allGames.message && <p>{allGames.message}</p>}
             {games &&
-              games.map((game) => {
+              games?.map((game) => {
                 return <Game {...game} key={game.id} />
               })}
           </section>

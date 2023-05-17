@@ -36,35 +36,33 @@ const reducer = (state = initialState, { type, payload }) => {
     case POST_GAME:
       return { ...state }
     case SORT_GAMES: {
+      // mapeo las id, para que sea ''mas rapido''
       const allGamesMap = {}
-
       state.allGames.forEach((game) => {
-        allGamesMap[game.id] = game
+        allGamesMap[game.id] = game.id
       })
 
-      const sortedGames =
-        payload === '⯀'
-          ? [...state.games] // Hacer una copia de state.games
-              .sort((a, b) => {
-                const indexA = state.games.indexOf(a) // Obtener el índice de a en state.games
-                const indexB = state.games.indexOf(b) // Obtener el índice de b en state.games
-                return indexA - indexB // Ordenar según los índices
-              })
-              .map((game) => allGamesMap[game.id])
-          : [...state.allGames].sort((a, b) => {
-              if (payload === '🠕') return a.name.localeCompare(b.name)
-              if (payload === '🠗') return b.name.localeCompare(a.name)
-            })
+      let sortedGames
+
+      if (payload === '⯀')
+        sortedGames = [...state.games].filter(
+          (game) => game.id === allGamesMap[game.id]
+        )
+      else
+        sortedGames = [...state.allGames].sort((a, b) => {
+          if (payload === '🠕') return a.name.localeCompare(b.name) // orden ascendente
+          if (payload === '🠗') return b.name.localeCompare(a.name) // orden descendente
+        })
+
       return { ...state, allGames: sortedGames }
     }
     case SOURCE_GAMES: {
       const filterGames =
         payload === 'All'
           ? [...state.games]
-          : state.games.filter((game) => {
-              if (payload === 'DB') return isNaN(+game.id)
-              if (payload === 'API') return typeof game.id === 'number'
-            })
+          : state.games.filter((game) =>
+              payload === 'DB' ? isNaN(+game.id) : typeof game.id === 'number'
+            )
       return { ...state, allGames: filterGames }
     }
     default:
