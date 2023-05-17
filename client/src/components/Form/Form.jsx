@@ -2,18 +2,33 @@ import { useEffect, useRef, useState } from 'react'
 import { getCurrentDate } from '../../utils/date'
 import styles from './Form.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { cleanGenres, getGenres } from '../../redux/actions'
+import { cleanGenres, getGenres, postGame } from '../../redux/actions'
+import { validateGame } from '../../utils/validate'
+
+const initGame = {
+  name: '',
+  description: '',
+  platforms: [],
+  image: '',
+  released: '',
+  rating: 0,
+  genres: []
+}
+
+const initError = {
+  status: false,
+  name: '',
+  description: '',
+  platforms: '',
+  image: '',
+  released: '',
+  rating: '',
+  genres: ''
+}
 
 const Form = () => {
-  const [gameInfo, setGameInfo] = useState({
-    name: '',
-    description: '',
-    platforms: [],
-    image: '',
-    released: '',
-    rating: 0,
-    genres: []
-  })
+  const [gameInfo, setGameInfo] = useState(initGame)
+  const [error, setError] = useState(initError)
 
   const inputRef = useRef(null)
 
@@ -27,12 +42,14 @@ const Form = () => {
 
   useEffect(() => {
     console.log(gameInfo)
-  }, [gameInfo])
+    console.log(error)
+  }, [gameInfo, error])
 
   const addGenre = (event) => {
     const { value } = event.target
     const gen = gens.find((gen) => gen.id === +value)
     setGameInfo({ ...gameInfo, genres: [...gameInfo.genres, gen] })
+    setError({ ...gameInfo })
   }
 
   const removeGenre = (id) => {
@@ -49,10 +66,6 @@ const Form = () => {
       (plat) => plat.toLowerCase() === value.toLowerCase()
     )
 
-    console.log(event)
-
-    console.log(value.slice(-2).length)
-
     if (key === 'Enter' || value.slice(-2) === '  ') {
       event.preventDefault()
       if (!isFound && value !== '') {
@@ -60,6 +73,7 @@ const Form = () => {
           ...gameInfo,
           platforms: [...gameInfo.platforms, value.trim()]
         })
+        setError({ ...gameInfo })
         inputRef.current.value = ''
       }
     }
@@ -71,12 +85,20 @@ const Form = () => {
   }
 
   const handleChange = (event) => {
-    const { name, value } = event.target
+    let { name, value } = event.target
+
     setGameInfo({ ...gameInfo, [name]: value })
+    setError(validateGame({ ...gameInfo, [name]: value }))
   }
 
   const handlerSubmit = (event) => {
     event.preventDefault()
+    console.log(error.status)
+    if (!error.status) {
+      dispatch(postGame(gameInfo))
+      setGameInfo(initGame)
+      setError(initError)
+    }
   }
 
   return (
@@ -94,6 +116,7 @@ const Form = () => {
             onChange={handleChange}
             value={gameInfo.name}
           />
+          {error.name && <p>{error.name}</p>}
         </div>
 
         <div className={styles.registro}>
@@ -105,6 +128,7 @@ const Form = () => {
             onChange={handleChange}
             value={gameInfo.description}
           />
+          {error.description && <p>{error.description}</p>}
         </div>
 
         <div className={styles.registro}>
@@ -112,11 +136,11 @@ const Form = () => {
             Plataformas:
           </label>
           <input
-            ref={inputRef}
-            name='platforms'
+            ref={inputRef /* es que no queria crear un estado de mas */}
             type='text'
-            onKeyUp={addPlatform}
+            onKeyDown={addPlatform}
           />
+          {error.platforms && <p>{error.platforms}</p>}
         </div>
         <section className={styles.registro}>
           {gameInfo.platforms?.map((plat) => (
@@ -137,6 +161,7 @@ const Form = () => {
             onChange={handleChange}
             value={gameInfo.image}
           />
+          {error.image && <p>{error.image}</p>}
         </div>
 
         <div className={styles.registro}>
@@ -150,6 +175,7 @@ const Form = () => {
             onChange={handleChange}
             value={gameInfo.released}
           />
+          {error.released && <p>{error.released}</p>}
         </div>
 
         <div className={styles.registro}>
@@ -181,17 +207,20 @@ const Form = () => {
               </option>
             ))}
           </select>
+          <section className={styles.registro}>
+            {gameInfo.genres.map((gen) => (
+              <article key={gen.id}>
+                {gen.name}
+                <button onClick={() => removeGenre(gen.id)}>x</button>
+              </article>
+            ))}
+          </section>
+          {error.genres && <p>{error.genres}</p>}
         </div>
-        <section className={styles.registro}>
-          {gameInfo.genres.map((gen) => (
-            <article key={gen.id}>
-              {gen.name}
-              <button onClick={() => removeGenre(gen.id)}>x</button>
-            </article>
-          ))}
-        </section>
 
-        <button>Enviar</button>
+        <button type='submit' disabled={error.status}>
+          Enviar
+        </button>
       </form>
     </>
   )

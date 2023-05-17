@@ -6,6 +6,7 @@ import {
   GET_GAMES,
   GET_GAME_DETAILS,
   GET_GENRES,
+  SORT_GAMES,
   POST_GAME,
   SEARCH_GAMES
 } from './types-action'
@@ -105,5 +106,12 @@ export const getGenres = () => {
 export const cleanGenres = () => {
   return {
     type: CLEAN_GENRES
+  }
+}
+
+export const sortGames = (order)=>{
+  return {
+    type: SORT_GAMES,
+    payload: order
   }
 }

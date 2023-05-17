@@ -5,12 +5,14 @@ import {
   GET_GAMES,
   GET_GAME_DETAILS,
   GET_GENRES,
+  SORT_GAMES,
   POST_GAME,
   SEARCH_GAMES
 } from './types-action'
 
 const initialState = {
   allGames: [],
+  games: [],
   gameDetail: {},
   genres: []
 }
@@ -19,12 +21,9 @@ const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_GAMES:
     case SEARCH_GAMES:
-      return {
-        ...state,
-        allGames: payload
-      }
+      return { ...state, allGames: payload, games: payload }
     case CLEAN_GAMES:
-      return { ...state, allGames: [] }
+      return { ...state, allGames: [], games: [] }
     case GET_GAME_DETAILS:
       return { ...state, gameDetail: payload }
     case CLEAN_GAME_DETAILS:
@@ -35,7 +34,20 @@ const reducer = (state = initialState, { type, payload }) => {
       return { ...state, genres: [] }
     case POST_GAME:
       return { ...state }
-
+    case SORT_GAMES: {
+      const sortedGames =
+        payload === '⯀'
+          ? [...state.games]
+          : [...state.games].sort((a, b) => {
+              if (payload === '🠗') {
+                return b.name.localeCompare(a.name)
+              } 
+              if (payload === '🠕') {
+                return a.name.localeCompare(b.name)
+              }
+            })
+      return { ...state, allGames: sortedGames }
+    }
     default:
       return { ...state }
   }
