@@ -36,11 +36,17 @@ const reducer = (state = initialState, { type, payload }) => {
     case POST_GAME:
       return { ...state }
     case SORT_GAMES: {
+      const allGamesMap = {}
+
+      state.allGames.forEach((game) => {
+        allGamesMap[game.id] = game
+      })
+
       const sortedGames =
         payload === '⯀'
-          ? state.allGames.filter((game) =>
-              state.games.some((g) => g.id === game.id)
-            )
+          ? state.games
+              .map((game) => allGamesMap[game.id])
+              .filter((element) => element !== undefined)
           : [...state.allGames].sort((a, b) => {
               if (payload === '🠕') return a.name.localeCompare(b.name)
               if (payload === '🠗') return b.name.localeCompare(a.name)
