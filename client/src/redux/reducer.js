@@ -7,7 +7,8 @@ import {
   GET_GENRES,
   SORT_GAMES,
   POST_GAME,
-  SEARCH_GAMES
+  SEARCH_GAMES,
+  SOURCE_GAMES
 } from './types-action'
 
 const initialState = {
@@ -38,15 +39,28 @@ const reducer = (state = initialState, { type, payload }) => {
       const sortedGames =
         payload === '⯀'
           ? [...state.games]
-          : [...state.games].sort((a, b) => {
+          : [...state.allGames].sort((a, b) => {
               if (payload === '🠗') {
                 return b.name.localeCompare(a.name)
-              } 
+              }
               if (payload === '🠕') {
                 return a.name.localeCompare(b.name)
               }
             })
       return { ...state, allGames: sortedGames }
+    }
+
+    /* Falta reparar como muestra los datos */
+
+    case SOURCE_GAMES: {
+      const filterGames =
+        payload === 'All'
+          ? [...state.games]
+          : state.allGames.filter((game) => {
+              if (payload === 'DB') return isNaN(+game.id)
+              if (payload === 'API') return typeof game.id === 'number'
+            })
+      return { ...state, allGames: filterGames }
     }
     default:
       return { ...state }

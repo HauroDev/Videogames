@@ -9,3 +9,4 @@ export const GET_GENRES = 'GET_GENRES'
 export const CLEAN_GENRES = 'CLEAN_GENRES'
 
 export const SORT_GAMES = 'SORT_GAMES'
+export const SOURCE_GAMES = 'SOURCE_GAMES'
