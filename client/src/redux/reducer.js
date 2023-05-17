@@ -38,8 +38,8 @@ const reducer = (state = initialState, { type, payload }) => {
     case SORT_GAMES: {
       const sortedGames =
         payload === '⯀'
-          ? [...state.games]
-          : [...state.games].sort((a, b) => {
+          ? [...state.allGames]
+          : [...state.allGames].sort((a, b) => {
               if (payload === '🠕') return a.name.localeCompare(b.name)
               if (payload === '🠗') return b.name.localeCompare(a.name)
             })
