@@ -44,9 +44,13 @@ const reducer = (state = initialState, { type, payload }) => {
 
       const sortedGames =
         payload === '⯀'
-          ? state.games
+          ? [...state.games] // Hacer una copia de state.games
+              .sort((a, b) => {
+                const indexA = state.games.indexOf(a) // Obtener el índice de a en state.games
+                const indexB = state.games.indexOf(b) // Obtener el índice de b en state.games
+                return indexA - indexB // Ordenar según los índices
+              })
               .map((game) => allGamesMap[game.id])
-              .filter((element) => element !== undefined)
           : [...state.allGames].sort((a, b) => {
               if (payload === '🠕') return a.name.localeCompare(b.name)
               if (payload === '🠗') return b.name.localeCompare(a.name)
