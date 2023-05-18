@@ -29,6 +29,7 @@ const Form = () => {
           </label>
           <input
             name='name'
+            placeholder='ingrese un nombre...'
             type='text'
             onChange={handleChange}
             value={gameInfo.name}
@@ -41,6 +42,7 @@ const Form = () => {
           </label>
           <textarea
             name='description'
+            placeholder='Descripcion del juego...'
             onChange={handleChange}
             value={gameInfo.description}
           />
@@ -52,6 +54,7 @@ const Form = () => {
           </label>
           <input
             ref={inputRef}
+            placeholder='ingrese plataformas...'
             type='text'
             onKeyDown={(event) => {
               if (event.key === 'Enter') {
@@ -77,6 +80,7 @@ const Form = () => {
           </label>
           <input
             name='image'
+            placeholder='ingrese URL de la imagen...'
             type='text'
             onChange={handleChange}
             value={gameInfo.image}
@@ -89,6 +93,7 @@ const Form = () => {
           </label>
           <input
             name='released'
+            
             type='date'
             max={getCurrentDate()}
             onChange={handleChange}
@@ -105,7 +110,7 @@ const Form = () => {
             type='number'
             min='0'
             max='5'
-            step='0.1'
+            step='0.01'
             onChange={handleChange}
             value={gameInfo.rating}
           />
