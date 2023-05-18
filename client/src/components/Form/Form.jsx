@@ -49,7 +49,7 @@ const Form = () => {
     const { value } = event.target
     const gen = gens.find((gen) => gen.id === +value)
     setGameInfo({ ...gameInfo, genres: [...gameInfo.genres, gen] })
-    setError({ ...gameInfo })
+    setError(validateGame({ ...gameInfo }))
   }
 
   const removeGenre = (id) => {
@@ -73,7 +73,7 @@ const Form = () => {
           ...gameInfo,
           platforms: [...gameInfo.platforms, value.trim()]
         })
-        setError({ ...gameInfo })
+        setError(validateGame({ ...gameInfo }))
         inputRef.current.value = ''
       }
     }

@@ -2,13 +2,12 @@ import {
   CLEAN_GAMES,
   CLEAN_GAME_DETAILS,
   CLEAN_GENRES,
+  FILTER_GAMES,
   GET_GAMES,
   GET_GAME_DETAILS,
   GET_GENRES,
-  SORT_GAMES,
   POST_GAME,
-  SEARCH_GAMES,
-  SOURCE_GAMES
+  SEARCH_GAMES
 } from './types-action'
 
 const initialState = {
@@ -35,34 +34,43 @@ const reducer = (state = initialState, { type, payload }) => {
       return { ...state, genres: [] }
     case POST_GAME:
       return { ...state }
-    case SORT_GAMES: {
-      // mapeo las id, para que sea ''mas rapido''
-      const allGamesMap = {}
-      state.allGames.forEach((game) => {
-        allGamesMap[game.id] = game.id
+    case FILTER_GAMES: {
+      let filterGames = [...state.allGames]
+      if (!state.allGames.length) filterGames = [...state.games]
+
+      if (payload.source === 'DB') {
+        filterGames = state.games.filter((game) => isNaN(+game.id))
+      } else if (payload.source === 'API') {
+        filterGames = state.games.filter((game) => typeof game.id !== 'string')
+      } else if (payload.source === 'All') {
+        filterGames = [...state.games]
+      }
+
+      filterGames = filterGames.filter((game) => {
+        const genreIds = game.genres.map((genre) => genre.id)
+        const selectedGenreIds = payload.gens.map((genre) => genre.id)
+        return selectedGenreIds.every((id) => genreIds.includes(id))
       })
 
-      let sortedGames
+      if (!(payload.alpha === '⯀' && payload.rating === '⯀'))
+        filterGames.sort((a, b) => {
+          const order = {
+            '🠕': 1,
+            '🠗': -1,
+            '⯀': 0
+          }
 
-      if (payload === '⯀')
-        sortedGames = [...state.games].filter(
-          (game) => game.id === allGamesMap[game.id]
-        )
-      else
-        sortedGames = [...state.allGames].sort((a, b) => {
-          if (payload === '🠕') return a.name.localeCompare(b.name) // orden ascendente
-          if (payload === '🠗') return b.name.localeCompare(a.name) // orden descendente
+          const alphaOrder = a.name.localeCompare(b.name)
+          const ratingOrder = b.rating - a.rating
+
+          // Comparación simultánea por las propiedades "alpha" y "rating"
+          const compareResult =
+            alphaOrder * order[payload.alpha] +
+            ratingOrder * order[payload.rating]
+
+          return compareResult
         })
 
-      return { ...state, allGames: sortedGames }
-    }
-    case SOURCE_GAMES: {
-      const filterGames =
-        payload === 'All'
-          ? [...state.games]
-          : state.games.filter((game) =>
-              payload === 'DB' ? isNaN(+game.id) : typeof game.id === 'number'
-            )
       return { ...state, allGames: filterGames }
     }
     default:

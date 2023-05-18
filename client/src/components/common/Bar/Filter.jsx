@@ -1,57 +1,94 @@
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { sortGames, sourceGames } from '../../../redux/actions'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { cleanGenres, filterGames, getGenres } from '../../../redux/actions'
 
 const Filter = () => {
-  const [toggle, setToggle] = useState('🠗')
-  const [indicador, setIndicador] = useState('Descendente')
-  const [source, setSource] = useState('DB')
+  const [filtro, setFiltro] = useState({
+    alpha: '⯀',
+    rating: '⯀',
+    source: 'All',
+    gens: []
+  })
 
   const dispatch = useDispatch()
+  const { genres } = useSelector((state) => state)
 
-  const handlerSort = () => {
-    setToggle((prevState) => {
-      if (prevState === '⯀') return '🠗'
-      if (prevState === '🠗') return '🠕'
-      if (prevState === '🠕') return '⯀'
-    })
-    setIndicador(() => {
-      if (toggle === '⯀') return 'Descendente'
-      if (toggle === '🠗') return 'Ascendente'
-      if (toggle === '🠕') return 'Normal'
-    })
-    dispatch(sortGames(toggle))
+  useEffect(() => {
+    dispatch(getGenres())
+    return () => dispatch(cleanGenres())
+  }, [])
+
+  const handlerChange = ({ target: { value, name } }) => {
+    console.log(name + ': ' + value)
+
+    setFiltro({ ...filtro, [name]: value })
   }
 
-  const handlerSource = () => {
-    setSource((prev) => {
-      switch (prev) {
-        case 'All':
-          return 'DB'
-        case 'DB':
-          return 'API'
-        case 'API':
-        default:
-          return 'All'
-      }
+  const addGenre = ({ target: { value } }) => {
+    let gen = genres.find((g) => g.id === +value)
+    setFiltro({
+      ...filtro,
+      gens: !filtro.gens.some((g) => g.id === +gen.id)
+        ? [...filtro.gens, gen]
+        : [...filtro]
     })
-    dispatch(sourceGames(source))
+  }
+
+  const removeGenre = (id) => {
+    const updateGenres = filtro.gens.filter((gen) => gen.id !== +id)
+    setFiltro({ ...filtro, gens: updateGenres })
+  }
+
+  const handlerSubmit = (event) => {
+    event.preventDefault()
+    dispatch(filterGames({ ...filtro }))
   }
 
   return (
-    <div>
+    <form onSubmit={handlerSubmit}>
       <div>
         <p>Orden:</p>
-        <button onClick={handlerSort}>
-          Alfabetico: {toggle} {indicador}
-        </button>
+        <select name='alpha' onChange={handlerChange}>
+          <option value='⯀'>Normal</option>
+          <option value='🠕'>A-Z</option>
+          <option value='🠗'>Z-A</option>
+        </select>
+        <select name='rating' onChange={handlerChange}>
+          <option value='⯀'>Normal</option>
+          <option value='🠕'>Mayor</option>
+          <option value='🠗'>Menor</option>
+        </select>
       </div>
 
       <div>
         <p>Filtrar por:</p>
-        <button onClick={handlerSource}>Fuente: {source}</button>
+        <select name='source' onChange={handlerChange}>
+          <option value='All'>Todos</option>
+          <option value='DB'>Base de Datos</option>
+          <option value='API'>RAWG</option>
+        </select>
+        <select name='genres' defaultValue='0' onChange={addGenre}>
+          <option value='0' disabled hidden>
+            Selecciona una opción
+          </option>
+          {genres?.map((g) => (
+            <option key={g.id} value={g.id}>
+              {g.name}
+            </option>
+          ))}
+        </select>
+        <div>
+          {filtro.gens.map((gen) => (
+            <div key={gen.id}>
+              {gen.name}
+              <button onClick={() => removeGenre(gen.id)}>x</button>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+
+      <button type='submit'>Aplicar filtros</button>
+    </form>
   )
 }
 

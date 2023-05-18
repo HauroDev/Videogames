@@ -22,7 +22,8 @@ const config = {
     'react/prop-types': 'off',
     'import/no-unresolved': 'error',
     'react-hooks/exhaustive-deps': 'off',
-    'no-undef': 'off'
+    'no-undef': 'off',
+    'no-unused-vars':'off'
   }
 }
 

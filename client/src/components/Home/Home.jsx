@@ -1,9 +1,10 @@
+import Filter from '../common/Bar/Filter'
 import Games from './Games/Games'
 
 const Home = () => {
   return (
     <>
-      <p>Buscador de juegos</p>
+      <Filter />
       <Games />
     </>
   )

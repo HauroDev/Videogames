@@ -39,6 +39,7 @@ const Games = () => {
 
   return (
     <>
+    <h1>Juegos</h1>
       {loading ? (
         <Loading message='Cargando...' />
       ) : (
