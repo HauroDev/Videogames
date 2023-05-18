@@ -1,16 +1,23 @@
 import { useDispatch, useSelector } from 'react-redux'
-import Game from './Game/Game'
-import Pagination from './../Pagination/Pagination'
-
-import styles from './Games.module.css'
 import { useEffect, useState } from 'react'
+import usePagination from './UsePagination'
 import { cleanGames, getGames } from '../../../redux/actions'
 import Loading from '../../common/Loading/Loading'
+import Game from './Game/Game'
+
+import styles from './Games.module.css'
 
 const Games = () => {
-  const [games, setGames] = useState([])
-  const [loading, setLoading] = useState(true)
   const { allGames } = useSelector((state) => state)
+  const {
+    currentPage,
+    totalPages,
+    getPageItems,
+    nextPage,
+    previousPage,
+    goToPage
+  } = usePagination(allGames, 15)
+  const [loading, setLoading] = useState(true)
 
   const dispatch = useDispatch()
 
@@ -22,42 +29,45 @@ const Games = () => {
   }, [])
 
   useEffect(() => {
-    if (allGames.length) setGames(allGames.slice(0, 15))
-    else setGames([])
     return () => setLoading(false)
   }, [allGames])
 
-  const loadPage = (page) => {
-    let posInit = 15 * page
-    let posFinal = posInit + 15
-
-    if (posFinal > allGames?.length) posFinal = allGames.length
-
-    const array = allGames.slice(posInit, posFinal)
-    setGames(array)
-  }
-
   return (
     <>
-    <h1>Juegos</h1>
+      <h1>Juegos</h1>
       {loading ? (
         <Loading message='Cargando...' />
       ) : (
-        <>
+        <div>
           <section className={styles.cards}>
             {allGames.message && <p>{allGames.message}</p>}
-            {games &&
-              games?.map((game) => {
+            {getPageItems(currentPage) &&
+              getPageItems(currentPage)?.map((game) => {
                 return <Game {...game} key={game.id} />
               })}
           </section>
-          {!allGames.message && (
-            <Pagination
-              pages={Math.ceil(allGames.length / 15)}
-              loadPage={loadPage}
-            />
-          )}
-        </>
+          <div>
+            <button onClick={previousPage}>{'<-'}</button>
+
+            <div>
+              <ul>
+                {(() => {
+                  const pageNumbers = []
+                  for (let i = 0; i < totalPages; i++) {
+                    pageNumbers.push(
+                      <li key={i}>
+                        <button onClick={() => goToPage(i)}>{i + 1}</button>
+                      </li>
+                    )
+                  }
+                  return pageNumbers
+                })()}
+              </ul>
+            </div>
+
+            <button onClick={nextPage}>{'->'}</button>
+          </div>
+        </div>
       )}
     </>
   )

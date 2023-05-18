@@ -35,8 +35,8 @@ const reducer = (state = initialState, { type, payload }) => {
     case POST_GAME:
       return { ...state }
     case FILTER_GAMES: {
-      let filterGames = [...state.allGames]
-      if (!state.allGames.length) filterGames = [...state.games]
+      // si las modifiaciones anteriores destruyen por completo el array de presentacion, copio lo del array de respaldo
+      let filterGames = [...state.allGames.length ? state.allGames : state.games];
 
       if (payload.source === 'DB') {
         filterGames = state.games.filter((game) => isNaN(+game.id))
