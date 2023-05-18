@@ -50,7 +50,17 @@ const Form = () => {
           <label className={styles.label} htmlFor='platforms'>
             Plataformas:
           </label>
-          <input ref={inputRef} type='text' onKeyDown={addPlatform} />
+          <input
+            ref={inputRef}
+            type='text'
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                event.preventDefault()
+                addPlatform(event.target.value)
+              }
+            }}
+          />
+          <button onClick={() => addPlatform(inputRef.current.value)}>+</button>
         </div>
         <section className={styles.registro}>
           {gameInfo.platforms?.map((plat) => (

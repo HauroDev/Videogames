@@ -66,27 +66,19 @@ const useGameForm = () => {
     })
   }
 
-  const addPlatform = (event) => {
-    const {
-      key,
-      target: { value }
-    } = event
-
+  const addPlatform = (value) => {
     const isFound = gameInfo.platforms.some(
       (plat) => plat.toLowerCase() === value.toLowerCase().trim()
-    )
-
-    if (key === 'Enter') {
-      event.preventDefault()
-      if (!isFound && value !== '') {
-        setGameInfo({
-          ...gameInfo,
-          platforms: [...gameInfo.platforms, value.trim()]
-        })
-        inputRef.current.value = ''
-      }
+    );
+  
+    if (!isFound && value !== '') {
+      setGameInfo({
+        ...gameInfo,
+        platforms: [...gameInfo.platforms, value.trim()],
+      });
+      inputRef.current.value = '';
     }
-  }
+  };
 
   const removePlatform = (name) => {
     setGameInfo({
