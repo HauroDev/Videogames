@@ -53,10 +53,23 @@ export const getGameDetails = (id) => {
 export const postGame = (game) => {
   const endpoint = url_server + '/videogames'
   return async (dispatch) => {
-    await axios.post(endpoint, game)
-    return dispatch({
-      type: POST_GAME
-    })
+    try {
+      const { data } = await axios.post(endpoint, game)
+      return dispatch({
+        type: POST_GAME,
+        payload: data
+      })
+    } catch ({
+      response: {
+        status,
+        data: { message }
+      }
+    }) {
+      return dispatch({
+        type: POST_GAME,
+        payload: { status, message }
+      })
+    }
   }
 }
 

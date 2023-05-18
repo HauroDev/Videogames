@@ -14,7 +14,8 @@ const initialState = {
   allGames: [],
   games: [],
   gameDetail: {},
-  genres: []
+  genres: [],
+  gamePost: {}
 }
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -33,10 +34,12 @@ const reducer = (state = initialState, { type, payload }) => {
     case CLEAN_GENRES:
       return { ...state, genres: [] }
     case POST_GAME:
-      return { ...state }
+      return { ...state, gamePost: payload }
     case FILTER_GAMES: {
       // si las modifiaciones anteriores destruyen por completo el array de presentacion, copio lo del array de respaldo
-      let filterGames = [...state.allGames.length ? state.allGames : state.games];
+      let filterGames = [
+        ...(state.allGames.length ? state.allGames : state.games)
+      ]
 
       if (payload.source === 'DB') {
         filterGames = state.games.filter((game) => isNaN(+game.id))

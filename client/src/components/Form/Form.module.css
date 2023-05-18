@@ -17,3 +17,12 @@
   padding-left: 0;
   text-align: left;
 }
+
+.error{
+  color: red;
+  border: 3px solid red
+}
+.good{
+  color: greenyellow;
+  border: 3px solid greenyellow
+}
