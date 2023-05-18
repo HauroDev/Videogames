@@ -35,7 +35,7 @@ const getGames = async (name) => {
   resDB = resDB?.map((g) => g.toJSON())
   resAPI = resAPI?.map(filterGameProperties)
 
-  const games = [...resDB, ...resAPI]
+  const games = [...resDB.reverse(), ...resAPI]
 
   if (!games.length)
     throw customError(404, `No se encontraron juego con el nombre ${name}`)
