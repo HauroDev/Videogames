@@ -15,7 +15,7 @@ const postGame = async (data) => {
   })
 
   if (game)
-    throw customError(400, `El juego ya fue creado, su id es ${game.id}`)
+    throw customError(409, `El juego ya fue creado, su id es ${game.id}`)
 
   const genresIds = genres.map((g) => g.id)
   const genresFind = await Genre.findAll({ where: { id: genresIds } })
