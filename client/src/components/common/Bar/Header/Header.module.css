@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+
+  position: sticky;
+  margin: 10px;
+  padding: 10px;
+  top: 0;
+  left: 0;
+  background-color: #151515;
+  height: 8em;
+  width: 100%;
+}

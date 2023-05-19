@@ -1,0 +1,32 @@
+.ul {
+  margin-right: 12rem;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.li {
+  margin-left: 3em;
+  text-decoration: none;
+  color: #F5F5F5;
+  padding: 10px 20px;
+
+  font-weight: 600;
+
+  border: 2px solid #9A67EA;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+
+.li:hover {
+  color: #FFFFFF;
+  border: 2px solid #6F42C1;
+}
+
+.li:active {
+  color: #FFFFFF;
+  border: 2px solid #9A67EA;
+}

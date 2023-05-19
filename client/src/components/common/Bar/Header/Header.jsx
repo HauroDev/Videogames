@@ -1,12 +1,15 @@
 import { useLocation } from 'react-router-dom'
-import NavBar from './NavBar'
-import SearchBar from './SearchBar'
+import NavBar from '../NavBar/NavBar'
+import SearchBar from '../SearchBar'
+
+import styles from './Header.module.css'
+
 
 const Header = () => {
   const { pathname: ubicacion } = useLocation()
 
   return (
-    <header>
+    <header className={styles.header}>
       {ubicacion !== '/' && (
         <>
           <NavBar />
