@@ -3,14 +3,20 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
-
   position: sticky;
-  margin: 10px;
-  padding: 10px;
+  padding: .5rem;
   top: 0;
-  left: 0;
   background-color: #151515;
   height: 8em;
-  width: 100%;
+}
+
+
+/* Estilos para pantallas de hasta 600px de ancho */
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    height: auto;
+  }
+
+
 }
