@@ -1,21 +1,93 @@
+.display {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .contenedor {
   display: flex;
-  flex-direction: row;
-  width: fit-content;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
 }
 
 .formulario {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0.5rem;
 
 }
 
+.data {
+  display: flex;
+  flex-direction: column;
+  min-width: 450px;
+}
+
+.input,
+.description {
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+}
+
+.tags {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.tag-item {
+  margin-right: 5px;
+  padding: 5px 10px;
+
+
+  background-color: rgb(93, 93, 93);
+  border-radius: 4px;
+  border: 1px solid #cccccc;
+
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tag-item:hover {
+  background-color: grey;
+}
 
 .error {
-  display: block;
+  padding: 5px;
   color: red;
   border: 3px solid red;
+  border-radius: 20px;
+  max-width: 600px;
+  min-width: 300px;
+}
+
+.done {
+  color: greenyellow;
+  border: 3px solid greenyellow;
+  border-radius: 20px;
+  padding: 0.5rem;
+}
+
+.reject {
+  color: red;
+  border: 3px solid red;
+  border-radius: 20px;
+  padding: 0.5rem;
 }
 
 .hidden {
   display: none;
+}
+
+@media (max-width: 768px) {
+  .contenedor {
+    flex-direction: column;
+  }
 }

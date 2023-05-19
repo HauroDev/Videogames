@@ -11,7 +11,6 @@
 }
 
 
-/* Estilos para pantallas de hasta 600px de ancho */
 @media (max-width: 600px) {
   .header {
     flex-direction: column;

@@ -1,65 +1,58 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: auto;
+}
+
 .games {
-  text-align: center;
-}
-
-.games h1 {
-  margin-bottom: 1rem;
-}
-
-.games .cards {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
+  flex-flow: row wrap;
 }
 
-.games .card {
-  width: 250px;
-  margin-bottom: 1rem;
-}
-
-.games .pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1rem;
-}
-
-.games .pagination button {
-  padding: 0.5rem 1rem;
-  margin: 0 0.25rem;
-}
-
-.games .pagination ul {
+.ul {
   list-style: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
   padding: 0;
+  margin: 0;
+  
+  display: flex;
+
+  position: sticky;
 }
 
-.games .pagination ul li {
-  margin-right: 0.5rem;
+.li {
+  background-color: #242430;
+  color: #F5F5F5;
+  padding: 5px 10px;
+
+  width: fit-content;
+
+  margin: 0 0.2rem;
+
+  border: 2px solid #9A67EA;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-.games .pagination ul li button {
-  padding: 0.25rem 0.5rem;
+.li .active {
+  color: #9A67EA;
 }
 
-.active {
-  background-color: #9A67EA;
+.li:hover {
+  color: #FFFFFF;
+  border: 2px solid #6F42C1;
 }
 
+.li:active {
+  color: #FFFFFF;
+  border: 2px solid #9A67EA;
+}
 
 @media (max-width: 600px) {
-  .games .cards {
-
+  .games {
     flex-direction: column;
-    align-items: center;
-  }
-
-  .games .card {
-    width: max-content;
   }
 }

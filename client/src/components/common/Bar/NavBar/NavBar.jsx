@@ -6,10 +6,10 @@ const NavBar = () => {
     <nav className={styles.nav}>
       <ul className={styles.ul}>
         <li className={styles.li}>
-          <NavLink to='/home'>Pagina Principal</NavLink>
+          <NavLink className={styles.navlink} to='/home'>Pagina Principal</NavLink>
         </li>
         <li className={styles.li}>
-          <NavLink to='/form'>Cargar Juego</NavLink>
+          <NavLink className={styles.navlink} to='/form'>Cargar Juego</NavLink>
         </li>
       </ul>
     </nav>

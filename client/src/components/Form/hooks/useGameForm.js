@@ -28,6 +28,7 @@ const useGameForm = () => {
   const [gameInfo, setGameInfo] = useState(initGame)
   const [error, setError] = useState(initError)
   const [response, setResponse] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
   const inputRef = useRef(null)
 
   const { genres: gens, gamePost } = useSelector((state) => state)
@@ -46,7 +47,7 @@ const useGameForm = () => {
   }, [gamePost])
 
   useEffect(() => {
-    return () => setError(validateGame({ ...gameInfo }))
+    return () => submitted && setError(validateGame({ ...gameInfo }))
   }, [gameInfo])
 
   const addGenre = (event) => {
@@ -94,13 +95,17 @@ const useGameForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    if (!error.status) {
-      dispatch(postGame(gameInfo))
-    }
-    setGameInfo(initGame)
-    setError(initError)
-  }
+    setSubmitted(true)
 
+    const validationErrors = validateGame(gameInfo)
+    if (Object.keys(validationErrors).length === 1) {
+      dispatch(postGame(gameInfo))
+      setGameInfo(initGame)
+      setError(initError)
+    } else {
+      setError({...validationErrors })
+    }
+  }
   return {
     gameInfo,
     gamePost,
