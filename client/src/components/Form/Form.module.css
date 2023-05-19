@@ -1,28 +1,21 @@
-.formulario {
+.contenedor {
   display: flex;
-  flex-direction: column;
-  
-}
-.registro {
-  display: inherit;
   flex-direction: row;
-  justify-content: space-between;
-}
-.label {
-  margin: .5rem 0;
-  margin-right: 10rem;
-  padding-top: 0;
-}
-.input {
-  padding-left: 0;
-  text-align: left;
+  width: fit-content;
 }
 
-.error{
-  color: red;
-  border: 3px solid red
+.formulario {
+  display: block;
+
 }
-.good{
-  color: greenyellow;
-  border: 3px solid greenyellow
+
+
+.error {
+  display: block;
+  color: red;
+  border: 3px solid red;
+}
+
+.hidden {
+  display: none;
 }

@@ -1,5 +1,65 @@
-.cards {
+.games {
+  text-align: center;
+}
+
+.games h1 {
+  margin-bottom: 1rem;
+}
+
+.games .cards {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.games .card {
+  width: 250px;
+  margin-bottom: 1rem;
+}
+
+.games .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.games .pagination button {
+  padding: 0.5rem 1rem;
+  margin: 0 0.25rem;
+}
+
+.games .pagination ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.games .pagination ul li {
+  margin-right: 0.5rem;
+}
+
+.games .pagination ul li button {
+  padding: 0.25rem 0.5rem;
+}
+
+.active {
+  background-color: #9A67EA;
+}
+
+
+@media (max-width: 600px) {
+  .games .cards {
+
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .games .card {
+    width: max-content;
+  }
 }

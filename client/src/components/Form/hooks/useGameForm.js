@@ -27,7 +27,6 @@ const useGameForm = () => {
 
   const [gameInfo, setGameInfo] = useState(initGame)
   const [error, setError] = useState(initError)
-  const [submitted, setSubmitted] = useState(false)
   const [response, setResponse] = useState(false)
   const inputRef = useRef(null)
 
@@ -47,7 +46,7 @@ const useGameForm = () => {
   }, [gamePost])
 
   useEffect(() => {
-    setError(validateGame({ ...gameInfo }))
+    return () => setError(validateGame({ ...gameInfo }))
   }, [gameInfo])
 
   const addGenre = (event) => {
@@ -69,16 +68,16 @@ const useGameForm = () => {
   const addPlatform = (value) => {
     const isFound = gameInfo.platforms.some(
       (plat) => plat.toLowerCase() === value.toLowerCase().trim()
-    );
-  
+    )
+
     if (!isFound && value !== '') {
       setGameInfo({
         ...gameInfo,
-        platforms: [...gameInfo.platforms, value.trim()],
-      });
-      inputRef.current.value = '';
+        platforms: [...gameInfo.platforms, value.trim()]
+      })
+      inputRef.current.value = ''
     }
-  };
+  }
 
   const removePlatform = (name) => {
     setGameInfo({
@@ -95,21 +94,17 @@ const useGameForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    setSubmitted(true)
-
     if (!error.status) {
       dispatch(postGame(gameInfo))
-      setGameInfo(initGame)
-      setError(initError)
-      setSubmitted(false)
     }
+    setGameInfo(initGame)
+    setError(initError)
   }
 
   return {
     gameInfo,
     gamePost,
     error,
-    submitted,
     response,
     inputRef,
     gens,

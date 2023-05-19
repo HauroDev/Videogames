@@ -34,41 +34,43 @@ const Games = () => {
 
   return (
     <>
-      <h1>Juegos</h1>
-      {loading ? (
-        <Loading message='Cargando...' />
-      ) : (
-        <div>
-          <section className={styles.cards}>
-            {allGames.message && <p>{allGames.message}</p>}
-            {getPageItems(currentPage) &&
-              getPageItems(currentPage)?.map((game) => {
-                return <Game {...game} key={game.id} />
-              })}
-          </section>
+      <div className={styles.games}>
+        <h1>Juegos</h1>
+        {loading ? (
+          <Loading message='Cargando...' />
+        ) : (
           <div>
-            <button onClick={previousPage}>{'<-'}</button>
+            <section className={styles.cards}>
+              {allGames.message && <p>{allGames.message}</p>}
+              {getPageItems(currentPage) &&
+                getPageItems(currentPage)?.map((game) => {
+                  return <Game {...game} key={game.id} />
+                })}
+            </section>
+            <div className={styles.pagination}>
+              <button onClick={previousPage}>{'<'}</button>
 
-            <div>
-              <ul>
-                {(() => {
-                  const pageNumbers = []
-                  for (let i = 0; i < totalPages; i++) {
-                    pageNumbers.push(
-                      <li key={i}>
-                        <button onClick={() => goToPage(i)}>{i + 1}</button>
-                      </li>
-                    )
-                  }
-                  return pageNumbers
-                })()}
-              </ul>
+              <div>
+                <ul>
+                  {(() => {
+                    const pageNumbers = []
+                    for (let i = 0; i < totalPages; i++) {
+                      pageNumbers.push(
+                        <li key={i}>
+                          <button className={currentPage === i?styles.active:''} onClick={() => goToPage(i)}>{i + 1}</button>
+                        </li>
+                      )
+                    }
+                    return pageNumbers
+                  })()}
+                </ul>
+              </div>
+
+              <button onClick={nextPage}>{'>'}</button>
             </div>
-
-            <button onClick={nextPage}>{'->'}</button>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </>
   )
 }
