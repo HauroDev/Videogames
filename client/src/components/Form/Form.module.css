@@ -9,30 +9,25 @@
   display: flex;
   flex-direction: row-reverse;
   justify-content: center;
-  align-items: center;
+
 }
 
 .formulario {
+  text-align: left;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 
   padding: 0.5rem;
-
 }
 
 .data {
   display: flex;
   flex-direction: column;
-  min-width: 350px;
-}
+  margin-bottom: 0.5rem;
 
-.input,
-.description {
-  padding: 10px;
-  border: 1px solid #cccccc;
-  border-radius: 3px;
+  min-width: 350px;
 }
 
 .tags {
@@ -40,6 +35,7 @@
   flex-flow: row wrap;
   justify-content: flex-start;
   align-items: center;
+  height: auto;
 }
 
 .tag-item {
@@ -68,26 +64,93 @@
   min-width: 300px;
 }
 
+.hidden {
+  display: none;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
 .done {
+  max-width: 80%;
+
   color: greenyellow;
-  border: 3px solid greenyellow;
+  border: 2px solid greenyellow;
   border-radius: 20px;
   padding: 0.5rem;
 }
 
 .reject {
+  max-width: 80%;
+
+  background-color: gray;
   color: red;
-  border: 3px solid red;
+  border: 2px solid red;
   border-radius: 20px;
   padding: 0.5rem;
 }
 
-.hidden {
-  display: none;
+
+.platforms {
+  display: flex;
+  align-items: center;
 }
+
+.platforms input {
+  width: 18rem;
+}
+
+.platforms button {
+  width: 3.4rem;
+  height: 1.5rem;
+  text-align: center;
+}
+
+.columnado {
+  display: flex;
+  flex-direction: column;
+}
+
+.genres {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  margin-left: 0.5rem;
+}
+
+.special {
+  display: flex;
+  flex-direction: row;
+}
+
+.fecha-rating {
+  display: flex;
+  flex-direction: column;
+}
+
 
 @media (max-width: 768px) {
   .contenedor {
     flex-direction: column;
+  }
+
+  .genres {
+    width: auto;
+  }
+
+  .done,
+  .reject {
+    max-width: 90%;
+
   }
 }

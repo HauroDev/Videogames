@@ -18,21 +18,24 @@ const Form = () => {
     handleSubmit
   } = useGameForm()
   return (
-    <div className={styles.display} >
+    <div className={styles.display}>
       <div>
         <h1>Formulario</h1>
         <p>Carga información sobre tu videojuego</p>
       </div>
 
       {response && (
-        <p className={gamePost.status === 201 ? styles.done : styles.error}>
-          {gamePost?.message}
-        </p>
+        <div className={styles['popup-overlay']}>
+          <div
+            className={gamePost.status === 201 ? styles.done : styles.reject}
+          >
+            {gamePost?.message}
+          </div>
+        </div>
       )}
 
       <div className={styles.contenedor}>
-
-        <div className={`${error.status ? styles.reject : styles.hidden}`}>
+        <div className={`${error.status ? styles.error : styles.hidden}`}>
           {Object.values(error).map((err, index) => (
             <p key={index}>{err}</p>
           ))}
@@ -43,7 +46,6 @@ const Form = () => {
             <label htmlFor='name'>Titulo del juego: </label>
 
             <input
-              className={styles.input}
               name='name'
               placeholder='Nombre del juego'
               type='text'
@@ -54,7 +56,6 @@ const Form = () => {
 
           <div className={styles.data}>
             <label htmlFor='description'>Descripcion: </label>
-
             <textarea
               name='description'
               placeholder='Descripcion del juego...'
@@ -65,27 +66,29 @@ const Form = () => {
 
           <div className={styles.data}>
             <label htmlFor='platforms'>Plataformas: </label>
-            <input
-              className={styles.data}
-              ref={inputRef}
-              name='platforms'
-              placeholder='Para agregar oprima "Enter" '
-              type='text'
-              onClick={(event) => addPlatform(event.target.value)}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter') {
-                  event.preventDefault()
-                  addPlatform(event.target.value)
-                }
-              }}
-            />
-            <button
-              type='button'
-              onClick={() => addPlatform(inputRef.current.value)}
-            >
-              +
-            </button>
+            <div className={styles.platforms}>
+              <input
+                ref={inputRef}
+                name='platforms'
+                placeholder='Para agregar oprima "Enter"'
+                type='text'
+                onClick={(event) => addPlatform(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    event.preventDefault()
+                    addPlatform(event.target.value)
+                  }
+                }}
+              />
+              <button
+                type='button'
+                onClick={() => addPlatform(inputRef.current.value)}
+              >
+                +
+              </button>
+            </div>
           </div>
+
           <section className={styles.tags}>
             {gameInfo.platforms?.map((plat) => (
               <article
@@ -110,55 +113,58 @@ const Form = () => {
             />
           </div>
 
-          <div className={styles.data}>
-            <label htmlFor='released'>Fecha de lanzamiento: </label>
-            <input
-              name='released'
-              type='date'
-              max={getCurrentDate()}
-              onChange={handleChange}
-              value={gameInfo.released}
-            />
+          <div className={styles.special}>
+            <div className={styles['fecha-rating']}>
+              <div className={styles.columnado}>
+                <label htmlFor='released'>Fecha de lanzamiento: </label>
+                <input
+                  name='released'
+                  type='date'
+                  max={getCurrentDate()}
+                  onChange={handleChange}
+                  value={gameInfo.released}
+                />
+              </div>
+              <div className={styles.columnado}>
+                <label htmlFor='rating'>Rating: </label>
+                <input
+                  name='rating'
+                  type='number'
+                  min='0'
+                  max='5'
+                  step='0.01'
+                  onChange={handleChange}
+                  value={gameInfo.rating}
+                />
+              </div>
+            </div>
+            <div className={styles.genres}>
+              <label htmlFor='genres'>Géneros: </label>
+              <select name='genres' defaultValue='0' onChange={addGenre}>
+                <option value='0'>Seleccione un Genero</option>
+                {gens?.map((obj) => (
+                  <option key={obj.id} value={obj.id}>
+                    {obj.name}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
-          <div>
-            <label htmlFor='rating'>Rating: </label>
-            <input
-              name='rating'
-              type='number'
-              min='0'
-              max='5'
-              step='0.01'
-              onChange={handleChange}
-              value={gameInfo.rating}
-            />
-          </div>
+          <section className={styles.tags}>
+            {gameInfo.genres.map((gen) => (
+              <article
+                className={styles['tag-item']}
+                key={gen.id}
+                onClick={() => removeGenre(gen.id)}
+              >
+                {gen.name}
+              </article>
+            ))}
+          </section>
 
-          <div>
-            <label htmlFor='genres'>Géneros: </label>
-            <select name='genres' defaultValue='0' onChange={addGenre}>
-              <option value='0' disabled hidden>
-                Selecciona una opción
-              </option>
-              {gens?.map((obj) => (
-                <option key={obj.id} value={obj.id}>
-                  {obj.name}
-                </option>
-              ))}
-            </select>
-
-            <section className={styles.tags}>
-              {gameInfo.genres.map((gen) => (
-                <article className={styles['tag-item']} key={gen.id}>
-                  {gen.name}
-                  <button onClick={() => removeGenre(gen.id)}>x</button>
-                </article>
-              ))}
-            </section>
-          </div>
-
-          <button type='submit' disabled={error.status}>
-            Enviar
+          <button className={styles} type='submit' disabled={error.status}>
+            Enviar juego
           </button>
         </form>
       </div>
