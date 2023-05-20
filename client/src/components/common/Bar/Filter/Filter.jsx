@@ -19,8 +19,8 @@ const Filter = () => {
   }
 
   return (
-    <>
-      <button onClick={toggleFilter}>
+    <div>
+      <button className={styles['toggle-button']} onClick={toggleFilter}>
         {isFilterOpen ? 'Ocultar filtro' : 'Mostrar filtro'}
       </button>
       <form
@@ -68,20 +68,23 @@ const Filter = () => {
                   </option>
                 ))}
               </select>
-              <div>
-                {filtro.gens.map((gen) => (
-                  <div key={gen.id}>
-                    <p>{gen.name}</p>
-                    <button onClick={() => removeGenre(gen.id)}>x</button>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </div>
+        <div className={styles.tags}>
+          {filtro.gens.map((gen) => (
+            <div
+              className={styles['tag-item']}
+              key={gen.id}
+              onClick={() => removeGenre(gen.id)}
+            >
+              {gen.name}
+            </div>
+          ))}
+        </div>
         <button type='submit'>Aplicar filtros</button>
       </form>
-    </>
+    </div>
   )
 }
 

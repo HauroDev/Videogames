@@ -1,6 +1,5 @@
 import { useLocation } from 'react-router-dom'
 import NavBar from '../NavBar/NavBar'
-import SearchBar from '../SearchBar/SearchBar'
 
 import styles from './Header.module.css'
 import Filter from '../Filter/Filter'
