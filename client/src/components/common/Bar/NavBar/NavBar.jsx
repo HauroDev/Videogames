@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import styles from './NavBar.module.css'
+import SearchBar from '../SearchBar/SearchBar'
 
 const NavBar = () => {
   return (
@@ -12,6 +13,7 @@ const NavBar = () => {
           <NavLink className={styles.navlink} to='/form'>Cargar Juego</NavLink>
         </li>
       </ul>
+      <SearchBar />
     </nav>
   )
 }

@@ -3,22 +3,15 @@ import NavBar from '../NavBar/NavBar'
 import SearchBar from '../SearchBar/SearchBar'
 
 import styles from './Header.module.css'
+import Filter from '../Filter/Filter'
 
 const Header = () => {
   const { pathname: ubicacion } = useLocation()
 
   return (
     <header className={ubicacion !== '/' && styles.header}>
-      {ubicacion !== '/' && (
-        <>
-          <NavBar />
-          {ubicacion === '/home' && (
-            <>
-              <SearchBar />
-            </>
-          )}
-        </>
-      )}
+      {ubicacion !== '/' && <NavBar />}
+      {ubicacion === '/home' && <Filter />}
     </header>
   )
 }
