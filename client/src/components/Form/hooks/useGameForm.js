@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { cleanGenres, getGenres, postGame } from '../../../redux/actions'
+import {
+  cleanGameDetails,
+  cleanGenres,
+  getGenres,
+  postGame
+} from '../../../redux/actions'
 import { validateGame } from '../../../utils/validate'
 
 const useGameForm = () => {
@@ -36,19 +41,26 @@ const useGameForm = () => {
 
   useEffect(() => {
     dispatch(getGenres())
-    return () => dispatch(cleanGenres())
+    return () => {
+      dispatch(cleanGenres())
+      dispatch(cleanGameDetails())
+    }
   }, [])
 
   useEffect(() => {
     setTimeout(() => {
       setResponse(false)
-    }, 5000)
+    }, 3000)
     return () => setResponse(true)
   }, [gamePost])
 
   useEffect(() => {
-    return () => submitted && setError(validateGame({ ...gameInfo }))
-  }, [gameInfo])
+    if (submitted) {
+      const error = validateGame({ ...gameInfo })
+      setError(error)
+      return () => setError(error)
+    }
+  }, [submitted, gameInfo])
 
   const addGenre = (event) => {
     const { value } = event.target
@@ -103,7 +115,8 @@ const useGameForm = () => {
       setGameInfo(initGame)
       setError(initError)
     } else {
-      setError({...validationErrors })
+      setError({ ...validationErrors })
+      setSubmitted(false)
     }
   }
   return {

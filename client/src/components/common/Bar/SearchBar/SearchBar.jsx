@@ -20,9 +20,14 @@ const SearchBar = () => {
 
   return (
     <form className={styles['search-bar']} onSubmit={handlerSubmit}>
-      <label htmlFor='search'>Buscar: </label>
-      <input type='text' name='search' onChange={handlerChange} value={name} />
-      <button>Buscar juegos</button>
+      <input
+        placeholder='Rocket league, etc.'
+        type='text'
+        name='search'
+        onChange={handlerChange}
+        value={name}
+      />
+      <button type='submit'>Buscar</button>
     </form>
   )
 }

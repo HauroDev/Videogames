@@ -21,16 +21,15 @@ const Form = () => {
     <div className={styles.display}>
       <div>
         <h1>Formulario</h1>
-        <p>Carga información sobre tu videojuego</p>
       </div>
 
       {response && (
         <div className={styles['popup-overlay']}>
-          <div
+          <p
             className={gamePost.status === 201 ? styles.done : styles.reject}
           >
             {gamePost?.message}
-          </div>
+          </p>
         </div>
       )}
 
@@ -51,6 +50,7 @@ const Form = () => {
               type='text'
               onChange={handleChange}
               value={gameInfo.name}
+              autoComplete='off'
             />
           </div>
 
@@ -79,6 +79,7 @@ const Form = () => {
                     addPlatform(event.target.value)
                   }
                 }}
+                autoComplete='off'
               />
               <button
                 type='button'
@@ -110,6 +111,7 @@ const Form = () => {
               type='text'
               onChange={handleChange}
               value={gameInfo.image}
+              autoComplete='off'
             />
           </div>
 

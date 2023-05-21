@@ -62,16 +62,29 @@
 }
 
 .error {
-  padding: 5px;
-  color: red;
-  border: 3px solid red;
-  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+
+  margin-left: 5rem;
+  padding: 1rem 3rem;
   max-width: 600px;
   min-width: 300px;
+
+  width: 30rem;
+
+
+  color: #ff9393;
+  border: 3px solid red;
+  border-radius: 20px;
+}
+
+.error p {
+  margin: 0.75rem;
 }
 
 .hidden {
-  display: none;
+  opacity: 0;
 }
 
 .popup-overlay {
@@ -145,10 +158,21 @@
 }
 
 
-@media (max-width: 768px) {
+
+
+@media (max-width: 1080px) {
   .contenedor {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
+
+  .error {
+    margin: 1rem;
+    margin-bottom: 2rem;
+    width: auto;
+  }
+}
+
+@media (max-width: 768px) {
 
   .genres {
     width: auto;

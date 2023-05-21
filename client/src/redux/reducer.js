@@ -2,6 +2,7 @@ import {
   CLEAN_GAMES,
   CLEAN_GAME_DETAILS,
   CLEAN_GENRES,
+  CLEAN_POST_GAME,
   FILTER_GAMES,
   GET_GAMES,
   GET_GAME_DETAILS,
@@ -35,6 +36,8 @@ const reducer = (state = initialState, { type, payload }) => {
       return { ...state, genres: [] }
     case POST_GAME:
       return { ...state, gamePost: payload }
+    case CLEAN_POST_GAME:
+      return { ...state, gamePost: {} }
     case FILTER_GAMES: {
       // si las modifiaciones anteriores destruyen por completo el array de presentacion, copio lo del array de respaldo
       let filterGames = [

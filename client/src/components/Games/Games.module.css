@@ -1,11 +1,9 @@
-.container {
+.contenedor {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
-
 .games {
   display: flex;
   flex-flow: row wrap;
@@ -15,13 +13,14 @@
 
 .pagination {
   display: flex;
-  
+  justify-content: center;
+  align-items: center;
   position: sticky;
   bottom: 0;
 
-  padding: 1rem 1rem;
-  min-width: 380px;
-  border-radius: 50px 50px 10px 10px;
+  padding: 1rem;
+
+  border-radius: 30px 30px 10px 10px;
   background-color: #151515;
 }
 

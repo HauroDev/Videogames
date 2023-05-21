@@ -31,7 +31,7 @@ const Games = () => {
   }, [allGames])
 
   return (
-    <div className={styles.container}>
+    <div className={styles.contenedor}>
       <h1>Juegos</h1>
       {loading ? (
         <Loading message='Cargando...' />

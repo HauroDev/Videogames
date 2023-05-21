@@ -8,7 +8,8 @@ import {
   GET_GENRES,
   POST_GAME,
   SEARCH_GAMES,
-  FILTER_GAMES
+  FILTER_GAMES,
+  CLEAN_POST_GAME
 } from './types-action'
 
 const url_server = 'https://videogames-api-1nxb.onrender.com' //investigar como usar las variables de entorno con netlify
@@ -109,6 +110,7 @@ export const filterGames = (options) => ({
   payload: options
 })
 
+export const cleanPostGame = ()=>({type: CLEAN_POST_GAME})
 export const cleanGames = () => ({ type: CLEAN_GAMES })
 export const cleanGameDetails = () => ({ type: CLEAN_GAME_DETAILS })
 export const cleanGenres = () => ({ type: CLEAN_GENRES })
