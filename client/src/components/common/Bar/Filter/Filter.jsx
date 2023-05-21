@@ -19,7 +19,7 @@ const Filter = () => {
   }
 
   return (
-    <div>
+    <div className={styles.contenedor}>
       <button className={styles['toggle-button']} onClick={toggleFilter}>
         {isFilterOpen ? 'Ocultar filtro' : 'Mostrar filtro'}
       </button>
