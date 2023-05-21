@@ -4,7 +4,6 @@
   justify-content: center;
   align-items: center;
 
-  width: auto;
 }
 
 .games {
@@ -17,8 +16,9 @@
   position: sticky;
   bottom: 0;
 
-
-  padding: 1rem 0;
+  padding: 1rem 1rem;
+  min-width: 380px;
+  border-radius: 50px 50px 10px 10px;
   background-color: #151515;
 }
 
