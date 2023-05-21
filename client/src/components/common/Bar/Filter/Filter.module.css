@@ -48,7 +48,6 @@
   margin-top: 1rem;
 
   height: auto;
-  max-width: 20rem;
 }
 
 .tag-item {
@@ -72,6 +71,10 @@
 }
 
 @media (max-width: 500px) {
+  .tags {
+    max-width: 20rem;
+  }
+
   .options {
     flex-direction: column;
   }

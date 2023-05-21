@@ -61,7 +61,7 @@ const Filter = () => {
             </div>
             <div className={styles.option}>
               <label htmlFor='genres'>Generos:</label>
-              <select name='genres' onClick={addGenre} onBlur={addGenre} multiple>
+              <select name='genres' onChange={addGenre}>
                 {genres?.map((g) => (
                   <option key={g.id} value={g.id}>
                     {g.name}
