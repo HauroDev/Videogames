@@ -32,3 +32,10 @@
   background-color: rgb(82, 82, 82);
   border-radius: 10px;
 }
+
+@media (max-width:768px) {
+  .card {
+    width: 22rem;
+    height: 20rem;
+  }
+}
