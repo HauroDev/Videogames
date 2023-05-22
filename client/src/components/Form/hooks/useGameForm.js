@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  cleanGameDetails,
   cleanGenres,
   cleanPostGame,
   getGenres,
@@ -57,12 +56,10 @@ const useGameForm = () => {
   }, [gamePost])
 
   useEffect(() => {
-    console.log('error')
-    if (submitted || error.status) {
-      const error = validateGame({ ...gameInfo })
-      console.log(error)
-      setError(error)
-      return () => setError(error)
+    const err = submitted && validateGame({ ...gameInfo })
+    if (submitted || error.status || err.status) {
+      setError(err)
+      return () => setError(err)
     }
   }, [submitted, gameInfo])
 

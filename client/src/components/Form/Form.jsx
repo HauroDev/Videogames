@@ -25,9 +25,7 @@ const Form = () => {
 
       {response && (
         <div className={styles['popup-overlay']}>
-          <p
-            className={gamePost.status === 201 ? styles.done : styles.reject}
-          >
+          <p className={gamePost.status === 201 ? styles.done : styles.reject}>
             {gamePost?.message}
           </p>
         </div>
@@ -139,8 +137,8 @@ const Form = () => {
             </div>
             <div className={styles.genres}>
               <label htmlFor='genres'>Géneros: </label>
-              <select name='genres' defaultValue='0' onChange={addGenre}>
-                <option value='0'>Seleccione un Genero</option>
+              <select name='genres' onChange={addGenre}>
+                <option hidden>Seleccione un Genero</option>
                 {gens?.map((obj) => (
                   <option key={obj.id} value={obj.id}>
                     {obj.name}

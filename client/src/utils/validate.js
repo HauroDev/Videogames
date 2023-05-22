@@ -35,10 +35,10 @@ export const validateGame = ({
 
   if (!released.length) error.released = 'Elija una fecha.'
 
+  if (!/^\d+(\.\d{1,2})?$|^\d+\.?$/.test(rating))
+    error.rating = 'El rating puede tener hasta 2 decimales.'
   if (rating < 0 || rating > 5)
     error.rating = 'El rating tiene que estar entre 0 y 5.'
-  if (/^\d+(\.\d{2})?$/.test(rating))
-    error.rating = 'El rating debe tener hasta 2 decimales.'
 
   if (!genres.length) error.genres = 'Debe elegir al menos un genero.'
 
