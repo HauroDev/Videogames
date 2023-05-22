@@ -132,9 +132,6 @@ const Form = () => {
                 <input
                   name='rating'
                   type='number'
-                  min='0'
-                  max='5'
-                  step='0.01'
                   onChange={handleChange}
                   value={gameInfo.rating}
                 />

@@ -22,12 +22,14 @@ const Games = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (!allGames?.length) dispatch(getGames())
-    return () => dispatch(cleanGames())
+    if (!allGames?.length) {
+      dispatch(getGames())
+      return () => dispatch(cleanGames())
+    }
   }, [])
 
   useEffect(() => {
-    if (!allGames.length || !loading) setLoading(true)
+    if (!allGames.length && !loading) setLoading(true)
     return () => setLoading(false)
   }, [allGames])
 

@@ -4,6 +4,7 @@ export const validateGame = ({
   platforms,
   image,
   released,
+  rating,
   genres
 }) => {
   const error = { status: false }
@@ -17,6 +18,10 @@ export const validateGame = ({
   if (description.length === 0) {
     error.description = 'La descripción no puede estar vacía.'
   }
+
+    if(description.split(' ').length < 5)
+    error.description = 'La descripción debe tener al menos 5 palabras'
+
   if (description.length > 1000) {
     error.description = 'La descripción no debe exceder los 1000 caracteres.'
   }
@@ -26,9 +31,14 @@ export const validateGame = ({
 
   if (!/^https?:\/\/[^\s/$.?#].[^\s]*$/.test(image))
     error.image =
-      'Se debe ingresar una url hacia una imagen \n(proximamente podra subirlo directamente).'
+      'Se debe ingresar una url hacia una imagen.'
 
   if (!released.length) error.released = 'Elija una fecha.'
+
+  if (rating < 0 || rating > 5)
+    error.rating = 'El rating tiene que estar entre 0 y 5.'
+  if (/^\d+(\.\d{2})?$/.test(rating))
+    error.rating = 'El rating debe tener hasta 2 decimales.'
 
   if (!genres.length) error.genres = 'Debe elegir al menos un genero.'
 

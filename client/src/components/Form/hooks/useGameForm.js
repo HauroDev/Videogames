@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   cleanGameDetails,
   cleanGenres,
+  cleanPostGame,
   getGenres,
   postGame
 } from '../../../redux/actions'
@@ -43,20 +44,23 @@ const useGameForm = () => {
     dispatch(getGenres())
     return () => {
       dispatch(cleanGenres())
-      dispatch(cleanGameDetails())
+      dispatch(cleanPostGame())
     }
   }, [])
 
   useEffect(() => {
     setTimeout(() => {
+      setSubmitted(false)
       setResponse(false)
     }, 3000)
     return () => setResponse(true)
   }, [gamePost])
 
   useEffect(() => {
-    if (submitted) {
+    console.log('error')
+    if (submitted || error.status) {
       const error = validateGame({ ...gameInfo })
+      console.log(error)
       setError(error)
       return () => setError(error)
     }
