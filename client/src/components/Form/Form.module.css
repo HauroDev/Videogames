@@ -184,3 +184,17 @@
 
   }
 }
+
+@media (max-width:500px) {
+
+  .error {
+    margin: 1rem 0;
+    padding: 1rem;
+    width: fit-content;
+  }
+
+  .error p {
+    margin-bottom: 1rem;
+    width: fit-content;
+  }
+}

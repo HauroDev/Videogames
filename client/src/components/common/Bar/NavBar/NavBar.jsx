@@ -13,7 +13,7 @@ const NavBar = () => {
           <NavLink className={styles.navlink} to='/home'>Home</NavLink>
         </li>
         <li className={styles.li}>
-          <NavLink className={styles.navlink} to='/form'>Cargar Juego</NavLink>
+          <NavLink className={styles.navlink} to='/form'>Form</NavLink>
         </li>
       </ul>
       <SearchBar />
