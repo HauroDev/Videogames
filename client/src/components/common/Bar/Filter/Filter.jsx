@@ -25,7 +25,10 @@ const Filter = () => {
       </button>
       <form
         className={`${styles.show} ${!isFilterOpen ? styles.hidden : ''}`}
-        onSubmit={handlerSubmit}
+        onSubmit={(event) => {
+          handlerSubmit(event)
+          setIsFilterOpen(false)
+        }}
       >
         <div className={styles.options}>
           <div>
@@ -61,7 +64,7 @@ const Filter = () => {
             </div>
             <div className={styles.option}>
               <label htmlFor='genres'>Generos:</label>
-              <select name='genres' onChange={addGenre}>
+              <select name='genres' onChange={addGenre} multiple>
                 {genres?.map((g) => (
                   <option key={g.id} value={g.id}>
                     {g.name}

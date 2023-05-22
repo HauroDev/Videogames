@@ -22,7 +22,7 @@ const Games = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getGames())
+    if (!allGames?.length) dispatch(getGames())
     return () => dispatch(cleanGames())
   }, [])
 

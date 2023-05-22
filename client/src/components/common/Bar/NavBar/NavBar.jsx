@@ -7,7 +7,10 @@ const NavBar = () => {
     <nav className={styles.nav}>
       <ul className={styles.ul}>
         <li className={styles.li}>
-          <NavLink className={styles.navlink} to='/home'>Pagina Principal</NavLink>
+          <NavLink className={styles.navlink} to='/'>Landing</NavLink>
+        </li>
+        <li className={styles.li}>
+          <NavLink className={styles.navlink} to='/home'>Home</NavLink>
         </li>
         <li className={styles.li}>
           <NavLink className={styles.navlink} to='/form'>Cargar Juego</NavLink>

@@ -15,9 +15,9 @@ const Landing = () => {
         <path d='M0 9.665v1.717a1 1 0 0 0 .553.894l6.553 3.277a2 2 0 0 0 1.788 0l6.553-3.277a1 1 0 0 0 .553-.894V9.665c0-.1-.06-.19-.152-.23L9.5 6.715v.993l5.227 2.178a.125.125 0 0 1 .001.23l-5.94 2.546a2 2 0 0 1-1.576 0l-5.94-2.546a.125.125 0 0 1 .001-.23L6.5 7.708l-.013-.988L.152 9.435a.25.25 0 0 0-.152.23z' />
       </svg>
 
-      <h1>Estas Buscando juegos</h1>
+      <h1>¿Estás buscando juegos?</h1>
       <p>
-        En esta pagina web podras encontrar todo sobre tus juegos favoritos,
+        En esta página encontrarás los juegos más populares y alguna que otra joyita.
       </p>
       <button onClick={goHome}>click para entrar</button>
     </div>

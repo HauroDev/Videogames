@@ -7,8 +7,7 @@
 .games {
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
 }
 
 .pagination {

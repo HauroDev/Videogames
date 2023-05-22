@@ -8,7 +8,7 @@ const Header = () => {
   const { pathname: ubicacion } = useLocation()
 
   return (
-    <header className={ubicacion !== '/' && styles.header}>
+    <header className={ubicacion !== '/' ? styles.header : undefined}>
       {ubicacion !== '/' && <NavBar />}
       {ubicacion === '/home' && <Filter />}
     </header>

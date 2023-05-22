@@ -27,7 +27,7 @@ const Detail = () => {
       {loading ? (
         <Loading message='Cargando detalles...' />
       ) : (
-        <>
+        <div className={styles.detail}>
           <h1>{gameDetail?.name}</h1>
           <p>Rating: {gameDetail?.rating}</p>
           <p>Fecha de lanzamiento: {gameDetail?.released}</p>
@@ -36,13 +36,13 @@ const Detail = () => {
             src={gameDetail?.image}
             alt={gameDetail?.name}
           />
-          <div dangerouslySetInnerHTML={{ __html: gameDetail?.description }} />
+          <div className={styles.description} dangerouslySetInnerHTML={{ __html: gameDetail?.description }} />
           <p>
             Plataformas:{' '}
             {gameDetail.platforms?.join(', ')}
           </p>
           <p>Generos: {gameDetail.genres?.map((gen) => gen.name).join(', ')}</p>
-        </>
+        </div>
       )}
     </>
   )
