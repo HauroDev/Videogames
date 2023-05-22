@@ -27,6 +27,7 @@ const Games = () => {
   }, [])
 
   useEffect(() => {
+    if (!allGames.length || !loading) setLoading(true)
     return () => setLoading(false)
   }, [allGames])
 
@@ -37,40 +38,49 @@ const Games = () => {
         <Loading message='Cargando...' />
       ) : (
         <>
-          <div className={styles.games}>
-            {allGames.message && <p>{allGames.message}</p>}
-            {getPageItems(currentPage)?.map((game) => {
-              return <Game {...game} key={game.id} />
-            })}
-          </div>
-          <nav className={styles.pagination}>
-            <a href='#' className={styles['arrow-page']} onClick={previousPage}>
-              &larr;
-            </a>
-            {(() => {
-              const pageNumbers = []
-              for (let i = 0; i < totalPages; i++) {
-                pageNumbers.push(
-                  <a
-                    href='#'
-                    key={i}
-                    className={`${styles['number-page']} ${
-                      currentPage === i
-                        ? `${styles.active} ${styles['select-page']}`
-                        : ''
-                    }`}
-                    onClick={() => goToPage(i)}
-                  >
-                    {i + 1}
-                  </a>
-                )
-              }
-              return pageNumbers
-            })()}
-            <a href='#' className={styles['arrow-page']} onClick={nextPage}>
-              &rarr;
-            </a>
-          </nav>
+          {allGames?.message ? (
+            <p>{allGames.message}</p>
+          ) : (
+            <>
+              <div className={styles.games}>
+                {getPageItems(currentPage)?.map((game) => {
+                  return <Game {...game} key={game.id} />
+                })}
+              </div>
+              <nav className={styles.pagination}>
+                <a
+                  href='#'
+                  className={styles['arrow-page']}
+                  onClick={previousPage}
+                >
+                  &larr;
+                </a>
+                {(() => {
+                  const pageNumbers = []
+                  for (let i = 0; i < totalPages; i++) {
+                    pageNumbers.push(
+                      <a
+                        href='#'
+                        key={i}
+                        className={`${styles['number-page']} ${
+                          currentPage === i
+                            ? `${styles.active} ${styles['select-page']}`
+                            : ''
+                        }`}
+                        onClick={() => goToPage(i)}
+                      >
+                        {i + 1}
+                      </a>
+                    )
+                  }
+                  return pageNumbers
+                })()}
+                <a href='#' className={styles['arrow-page']} onClick={nextPage}>
+                  &rarr;
+                </a>
+              </nav>
+            </>
+          )}
         </>
       )}
     </div>

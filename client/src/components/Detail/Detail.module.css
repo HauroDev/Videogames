@@ -1,11 +1,8 @@
 .detail {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
-  padding: 1rem;
-  margin: 2rem;
+  
+
+  margin: 1rem 0;
 
   border-radius: 30px;
   border: 3px groove #6F42C1;
@@ -22,6 +19,7 @@
 
 .image {
   border: 3px double #6F42C1;
+  border-radius: 30px;
   width: 40rem;
   margin: 2rem;
 }

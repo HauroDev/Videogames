@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { getSearch } from '../../../../redux/actions'
+import { cleanGames, getSearch } from '../../../../redux/actions'
 import { useState } from 'react'
 
 import styles from './SearchBar.module.css'
@@ -15,6 +15,7 @@ const SearchBar = () => {
     event.preventDefault()
     navigate('/home')
     dispatch(getSearch(name))
+    dispatch(cleanGames())
   }
 
   const handlerChange = (event) => {
