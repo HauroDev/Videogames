@@ -21,7 +21,8 @@ server.use(morgan('dev'))
 server.use((req, res, next) => {
   const allowedOrigins = [
     URL_CLIENT,
-    'http://localhost:4173' // Agrega la segunda página permitida aquí
+    'http://localhost:4173',
+    'http://192.168.0.241:4173'
   ]
   const origin = req.headers.origin
   if (allowedOrigins.includes(origin)) {
