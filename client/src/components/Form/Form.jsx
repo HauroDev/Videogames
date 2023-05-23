@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { getCurrentDate } from '../../utils/date'
 import styles from './Form.module.css'
 import useGameForm from './hooks/useGameForm'
