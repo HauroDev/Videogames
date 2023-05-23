@@ -30,7 +30,6 @@ module.exports = async (req, res) => {
     res.status(200).json({ ...game.toJSON(), genres })
   } catch (error) {
     const { message, status } = error
-    console.log(error)
     res.status(status || 500).json({ message })
   }
 }

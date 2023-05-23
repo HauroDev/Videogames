@@ -7,8 +7,6 @@ module.exports = async (req, res) => {
 
     let gen = await Genre.findByPk(genre.id)
 
-    console.log(gen)
-
     if (gen) throw customError(409, 'este genero ya existe.')
 
     gen = await Genre.create(genre)
