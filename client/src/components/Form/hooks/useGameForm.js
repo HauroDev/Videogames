@@ -55,17 +55,11 @@ const useGameForm = () => {
     return () => setResponse(true)
   }, [gamePost])
 
-  useEffect(() => {
-    // si submitted esta en true se busca los errores
-    const err = submitted && validateGame({ ...gameInfo })
+  useEffect(()=>{
+    if(submitted === true)
+      setError(validateGame(gameInfo))
+  },[gameInfo])
 
-    // si se encontro errores se setea el error en el estado
-    if (err.status) {
-      setError(err)
-      return () => setError(err)
-    }
-    
-  }, [submitted, gameInfo])
 
   const addGenre = (event) => {
     const { value } = event.target
@@ -119,10 +113,12 @@ const useGameForm = () => {
       dispatch(postGame(gameInfo))
       setGameInfo(initGame)
       setError(initError)
+
       setSubmitted(false)
-    } else {
-      setError(validationErrors)
-    }
+      return
+    } 
+
+    setError(validateGame)
   }
 
   return {

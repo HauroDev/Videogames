@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { getCurrentDate } from '../../utils/date'
 import styles from './Form.module.css'
 import useGameForm from './hooks/useGameForm'
@@ -17,6 +18,11 @@ const Form = () => {
     handleChange,
     handleSubmit
   } = useGameForm()
+
+  useEffect(() => {
+    console.log(error)
+  }, [gameInfo, error])
+
   return (
     <div className={styles.display}>
       <div>
@@ -32,13 +38,6 @@ const Form = () => {
       )}
 
       <div className={styles.contenedor}>
-        
-        <div className={`${error.status ? styles.error : styles.hidden}`}>
-          {Object.values(error).map((err, index) => (
-            <p key={index}>{err}</p>
-          ))}
-        </div>
-
         <form className={styles.formulario} onSubmit={handleSubmit}>
           <div className={styles.data}>
             <label htmlFor='name'>Titulo del juego: </label>
@@ -51,6 +50,11 @@ const Form = () => {
               value={gameInfo.name}
               autoComplete='off'
             />
+            {error.name && (
+              <p className={`${error.status ? styles.error : styles.hidden}`}>
+                {error.name}
+              </p>
+            )}
           </div>
 
           <div className={styles.data}>
@@ -61,6 +65,11 @@ const Form = () => {
               onChange={handleChange}
               value={gameInfo.description}
             />
+            {error.description && (
+              <p className={`${error.status ? styles.error : styles.hidden}`}>
+                {error.description}
+              </p>
+            )}
           </div>
 
           <div className={styles.data}>
@@ -87,6 +96,11 @@ const Form = () => {
                 +
               </button>
             </div>
+            {error.platforms && (
+              <p className={`${error.status ? styles.error : styles.hidden}`}>
+                {error.platforms}
+              </p>
+            )}
           </div>
 
           <section className={styles.tags}>
@@ -112,41 +126,58 @@ const Form = () => {
               value={gameInfo.image}
               autoComplete='off'
             />
+            {error.image && (
+              <p className={`${error.status ? styles.error : styles.hidden}`}>
+                {error.image}
+              </p>
+            )}
           </div>
 
-          <div className={styles.special}>
-            <div className={styles['fecha-rating']}>
-              <div className={styles.columnado}>
-                <label htmlFor='released'>Fecha de lanzamiento: </label>
-                <input
-                  name='released'
-                  type='date'
-                  max={getCurrentDate()}
-                  onChange={handleChange}
-                  value={gameInfo.released}
-                />
-              </div>
-              <div className={styles.columnado}>
-                <label htmlFor='rating'>Rating: </label>
-                <input
-                  name='rating'
-                  type='number'
-                  onChange={handleChange}
-                  value={gameInfo.rating}
-                />
-              </div>
-            </div>
-            <div className={styles.genres}>
-              <label htmlFor='genres'>Géneros: </label>
-              <select name='genres' defaultValue='0' onChange={addGenre}>
-                <option value='0'>Seleccione un Genero</option>
-                {gens?.map((obj) => (
-                  <option key={obj.id} value={obj.id}>
-                    {obj.name}
-                  </option>
-                ))}
-              </select>
-            </div>
+          <div className={styles.data}>
+            <label htmlFor='released'>Fecha de lanzamiento: </label>
+            <input
+              name='released'
+              type='date'
+              max={getCurrentDate()}
+              onChange={handleChange}
+              value={gameInfo.released}
+            />
+            {error.released && (
+              <p className={`${error.status ? styles.error : styles.hidden}`}>
+                {error.released}
+              </p>
+            )}
+          </div>
+          <div className={styles.data}>
+            <label htmlFor='rating'>Rating: </label>
+            <input
+              name='rating'
+              type='number'
+              onChange={handleChange}
+              value={gameInfo.rating}
+            />
+            {error.rating && (
+              <p className={`${error.status ? styles.error : styles.hidden}`}>
+                {error.rating}
+              </p>
+            )}
+          </div>
+
+          <div className={styles.data}>
+            <label htmlFor='genres'>Géneros: </label>
+            <select name='genres' defaultValue='0' onChange={addGenre}>
+              <option value='0'>Seleccione un Genero</option>
+              {gens?.map((obj) => (
+                <option key={obj.id} value={obj.id}>
+                  {obj.name}
+                </option>
+              ))}
+            </select>
+            {error.genres && (
+              <p className={`${error.status ? styles.error : styles.hidden}`}>
+                {error.genres}
+              </p>
+            )}
           </div>
 
           <section className={styles.tags}>

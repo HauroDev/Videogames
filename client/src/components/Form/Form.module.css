@@ -7,16 +7,15 @@
 
 .contenedor {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   justify-content: center;
-
 }
 
 .formulario {
   text-align: left;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: left;
   align-items: center;
 
   padding: 0.5rem;
@@ -66,17 +65,17 @@
   flex-direction: column;
   text-align: left;
 
-  margin-left: 5rem;
-  padding: 1rem 3rem;
+  /* margin-left: 5rem;
+  padding: 1rem 3rem; */
   max-width: 600px;
   min-width: 300px;
 
-  width: 30rem;
+  /* width: 30rem; */
 
 
   color: #ff9393;
-  border: 3px solid red;
-  border-radius: 20px;
+  /* border: 3px solid red;
+  border-radius: 20px; */
 }
 
 .error p {
