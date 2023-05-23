@@ -19,10 +19,6 @@ const Form = () => {
     handleSubmit
   } = useGameForm()
 
-  useEffect(() => {
-    console.log(error)
-  }, [gameInfo, error])
-
   return (
     <div className={styles.display}>
       <div>
