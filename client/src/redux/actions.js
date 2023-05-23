@@ -12,7 +12,7 @@ import {
   CLEAN_POST_GAME
 } from './types-action'
 
-const url_server = 'https://videogames-api-1nxb.onrender.com' //investigar como usar las variables de entorno con netlify
+const url_server = 'https://videogames-api-1nxb.onrender.com'
 
 export const getGames = () => {
   const endpoint = url_server + '/videogames'
