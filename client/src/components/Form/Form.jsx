@@ -32,6 +32,7 @@ const Form = () => {
       )}
 
       <div className={styles.contenedor}>
+        
         <div className={`${error.status ? styles.error : styles.hidden}`}>
           {Object.values(error).map((err, index) => (
             <p key={index}>{err}</p>
@@ -137,8 +138,8 @@ const Form = () => {
             </div>
             <div className={styles.genres}>
               <label htmlFor='genres'>Géneros: </label>
-              <select name='genres' onChange={addGenre}>
-                <option hidden>Seleccione un Genero</option>
+              <select name='genres' defaultValue='0' onChange={addGenre}>
+                <option value='0'>Seleccione un Genero</option>
                 {gens?.map((obj) => (
                   <option key={obj.id} value={obj.id}>
                     {obj.name}

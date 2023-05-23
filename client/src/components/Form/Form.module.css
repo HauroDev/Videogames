@@ -188,13 +188,12 @@
 @media (max-width:500px) {
 
   .error {
-    margin: 1rem 0;
+    margin: 0 1rem;
     padding: 1rem;
     width: fit-content;
   }
 
   .error p {
-    margin-bottom: 1rem;
-    width: fit-content;
+    margin: 0;
   }
 }

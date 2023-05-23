@@ -56,11 +56,15 @@ const useGameForm = () => {
   }, [gamePost])
 
   useEffect(() => {
+    // si submitted esta en true se busca los errores
     const err = submitted && validateGame({ ...gameInfo })
-    if (submitted || error.status || err.status) {
+
+    // si se encontro errores se setea el error en el estado
+    if (err.status) {
       setError(err)
       return () => setError(err)
     }
+    
   }, [submitted, gameInfo])
 
   const addGenre = (event) => {
@@ -109,17 +113,18 @@ const useGameForm = () => {
     event.preventDefault()
 
     setSubmitted(true)
-
     const validationErrors = validateGame(gameInfo)
+
     if (Object.keys(validationErrors).length === 1) {
       dispatch(postGame(gameInfo))
       setGameInfo(initGame)
       setError(initError)
-    } else {
-      setError({ ...validationErrors })
       setSubmitted(false)
+    } else {
+      setError(validationErrors)
     }
   }
+
   return {
     gameInfo,
     gamePost,
