@@ -1,4 +1,4 @@
-const { getGameForId } = require('../utils/getGameForId')
+const { getGameForId } = require('../../utils/getGameForId')
 
 module.exports = async (req, res) => {
   const { idVideogame } = req.params

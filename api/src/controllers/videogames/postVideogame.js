@@ -1,4 +1,4 @@
-const { postGame } = require('../utils/postGame')
+const { postGame } = require('../../utils/postGame')
 
 module.exports = async (req, res) => {
   try {

@@ -1,4 +1,4 @@
-const { getGames } = require('../utils/getGames.js')
+const { getGames } = require('../../utils/getGames.js')
 
 module.exports = async (req, res) => {
   try {

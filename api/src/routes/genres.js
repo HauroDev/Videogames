@@ -1,39 +1,16 @@
-const { default: axios } = require('axios')
 const { Router } = require('express')
-
-const { Genre } = require('../db')
-const { customError } = require('../utils/customError')
-
-require('dotenv').config()
-const { API_KEY } = process.env
+const getGenresApi = require('../controllers/genres/getGenresApi')
+const getGenreById = require('../controllers/genres/getGenreById')
+const postGenre = require('../controllers/genres/postGenre')
+const deleteGenreById = require('../controllers/genres/deleteGenreById')
+const modificationGenreById = require('../controllers/genres/modificationGenreById')
 
 const router = Router()
 
-router.get('/', async (_, res) => {
-  try {
-    const response = await axios.get(
-      `https://api.rawg.io/api/genres?key=${API_KEY}`
-    )
-
-    const {
-      data: { results }
-    } = response
-
-    const genres = results?.map(({ id, name }) => ({ id, name }))
-
-    const genresFind = await Genre.findAll({
-      where: { id: genres.map((gen) => gen.id) }
-    })
-    if (!genresFind.length) await Genre.bulkCreate(genres)
-    
-    // if (genres.length === genresFind.length)
-    //   throw customError(409, 'Ya se cargaron estos generos en la base de datos')
-
-    res.status(200).json({ genres })
-  } catch (error) {
-    const { message, status } = error
-    res.status(status || 500).json({ message })
-  }
-})
+router.get('/', getGenresApi)
+router.get('/:idGenre', getGenreById)
+router.post('/', postGenre)
+router.delete('/:idGenre', deleteGenreById)
+router.put('/:idGenre', modificationGenreById)
 
 module.exports = router
