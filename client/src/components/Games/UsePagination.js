@@ -31,6 +31,7 @@ const usePagination = (array, pageSize) => {
   }
 
   return {
+    setCurrentPage,
     currentPage,
     totalPages,
     getPageItems,

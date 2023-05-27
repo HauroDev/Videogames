@@ -10,6 +10,7 @@ import styles from './Games.module.css'
 const Games = () => {
   const { allGames } = useSelector((state) => state)
   const {
+    setCurrentPage,
     currentPage,
     totalPages,
     getPageItems,
@@ -30,6 +31,7 @@ const Games = () => {
 
   useEffect(() => {
     if (!allGames.length && !loading) setLoading(true)
+    goToPage(0)
     return () => setLoading(false)
   }, [allGames])
 
